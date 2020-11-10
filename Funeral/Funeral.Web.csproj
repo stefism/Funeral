@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Funeral-0E29E3CB-04D9-4DA4-BCB6-56D245359282</UserSecretsId>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="20.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Funeral.App\Funeral.App.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Pictures\Crosses\" />
+  </ItemGroup>
+
+</Project>

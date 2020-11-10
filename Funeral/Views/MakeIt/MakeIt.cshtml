@@ -1,0 +1,60 @@
+﻿@model Funeral.App.ViewModels.MakeItViewModel
+@{
+    ViewData["Title"] = "Направи си";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://kit.fontawesome.com/3c54b527d8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/Main.css">
+</head>
+<body>
+    <aside id="menu-items">
+
+        <ul>
+            <li><a href="?element=frames">Рамки</a></li>
+            <li><a href="?element=texts">Текстове</a></li>
+            <li><a href="?element=crosses">Кръстове</a></li>
+            @if (User.Identity.Name == "stef4otm@gmail.com")
+            {
+                <div class="dropdown">
+                    <button class="dropbtn">Администрация</button>
+                    <div class="dropdown-content">
+                        <a href="/Admin/UploadFrame">Качване на рамка</a>
+                        <a href="/Admin/UploadCross">Качване на кръст</a>
+                        <a href="/Admin/UploadText">Качване на текст</a>
+                    </div>
+                </div>
+            }
+        </ul>
+
+    </aside>
+
+    <section id="design">
+        <div id="main-window">
+            <img id="background" src="@Model.CurrentFrame" alt="">
+            <img width="70px" id="cross" src="~/Pictures/Crosses/cross1.gif" alt="">
+            <div id="pic-border">
+                <img id="face" id="cross" src="~/face.jpg" alt="">
+            </div>
+            <form method="post">
+                <textarea name="crossText" id="cross-text">ТЪЖЕН ПОМЕН</textarea>
+                <textarea name="afterCrossText" id="after-cross-text">Изминаха 40 дни от смъртта на нашият скъп съпруг, баща и дядо</textarea>
+                <textarea name="fullName" id="full-name">Име Презиме Фамилия</textarea>
+                <textarea name="year" id="year">1920 - 2018 г. (96 г.)</textarea>
+                <textarea name="mainText" id="main-text">Пред светлата ти памет, смирено скланяме глави и молим те за всичко ни прости! Липсваш ни до болка! Обичаме те! Почивай в мир!</textarea>
+                <textarea name="panahida" id="panahida">Панахидата ще се състои на 11.11.2011 г. от 11:00 ч. в гробищен парк "Бакърена фабрика", парцел 18, място 11.</textarea>
+                <textarea name="from" id="from">От опечалените.</textarea>
+            </form>
+        </div>
+        <div id="items">
+
+            @foreach (var frame in Model.AllFrames)
+            {
+                <a href="/MakeIt/ChangeFrame?frameId=@frame.FrameId"><img class="elements" src="@frame.FilePath" alt=""></a>
+            }
+
+        </div>
+    </section>
+</body>
+</html>

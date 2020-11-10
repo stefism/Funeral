@@ -1,0 +1,35 @@
+﻿@model Funeral.App.ViewModels.UploadFrameFilesViewModel
+@{
+    ViewData["Title"] = "Качване на рамка";
+}
+
+    <link rel="stylesheet" href="~/css/Upload.css">
+    <script src="https://kit.fontawesome.com/3c54b527d8.js" crossorigin="anonymous"></script>
+
+    <h1>Качване на нова рамка</h1>
+    <h4>Можете да качвате само файлове с разширение .jpg, .png и .gif.</h4>
+    <hr />
+
+    <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="UploadFrame">
+        <input  id="inputBtn" type="file" name="imgFile" />
+        <input  id="uploadBtn" type="submit" value="Качи файл." />
+        <hr />
+
+        <h4>@Model.UploadMessage</h4>
+    </form>
+    <hr />
+    <h2>Всички рамки:</h2>
+    <section id="all-frames">
+      
+
+        @foreach (var frame in Model.AllFrames)
+        {
+            <img class="frame" width="150px" src="@frame.FilePath" alt="Alternate Text" />
+            <a href="/Admin/DeleteFrame?frameId=@frame.FrameId"><i class="fas fa-trash-alt"></i></a>
+        }
+
+    </section>
+
+
+
+

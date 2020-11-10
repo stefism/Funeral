@@ -1,0 +1,14 @@
+﻿@model Funeral.App.ViewModels.AllFramesViewModel
+@{
+    ViewData["Title"] = "Премахване на рамка";
+}
+
+<h1>Внимание! Показаната по-долу рамка ще бъде премахната.</h1>
+<h4>Моля потвърдете премахването.</h4>
+<form method="post">
+    <input class="invisible" name="frameId" value="@Model.FrameId"/>
+    <button type="submit" class="btn btn-danger" asp-controller="Admin" asp-action="DoDeleteFrame">Премахни</button>
+</form>
+<hr />
+
+<img class="frame" width="500px" src="@Model.FilePath" alt="Alternate Text" />

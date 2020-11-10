@@ -1,0 +1,32 @@
+﻿@model Funeral.App.ViewModels.UploadCrossesFilesViewModel
+@{
+    ViewData["Title"] = "Качване на кръст";
+}
+
+    <link rel="stylesheet" href="~/css/Upload.css">
+
+    <h1>Качване на нов кръст</h1>
+    <h4>Можете да качвате само файлове с разширение .jpg, .png и .gif.</h4>
+    <hr />
+
+    <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="UploadCross">
+        <input  id="inputBtn" type="file" name="imgFile" />
+        <input  id="uploadBtn" type="submit" value="Качи файл." />
+        <hr />
+
+        <h4>@Model.UploadMessage</h4>
+    </form>
+    <hr />
+    <h2>Всички кръстове:</h2>
+    <section id="all-frames">
+
+        @foreach (var cross in Model.AllCrosses)
+        {
+            <img class="frame" width="150px" src="@cross.FilePath" alt="Alternate Text" />
+        }
+
+    </section>
+
+
+
+

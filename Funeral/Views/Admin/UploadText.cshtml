@@ -1,0 +1,21 @@
+﻿@model ICollection<Funeral.App.ViewModels.AllTextsViewModel>
+@{
+    ViewData["Title"] = "Качване на текст";
+}
+<h1>Качване на текст</h1>
+<hr />
+<form class="form-group" method="post">
+    <label for="funeral-text">Въведете текст:</label><br>
+    <input name="funeralText" type="text" id="funeral-text" value=""><br><br>
+    <input type="submit" value="Въведи">
+</form>
+<hr />
+<h4>Всички текстове:</h4>
+<section>
+    @foreach (var text in Model)
+    {
+        <p>@text.TextTemplate</p>
+        <hr />
+    }
+</section>
+
