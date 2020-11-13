@@ -31,25 +31,31 @@
 
     </aside>
 
-    
-
     <section id="design">
         <div id="main-window">
 
-            <div id="save-work">
+            @*<div id="save-work">
                 <a href=""><i class="fas fa-save"></i></a>
             </div>
 
             <div id="total-save">
                 <a href=""><i class="fas fa-share-square"></i></a>
-            </div>
+            </div>*@
 
             <img id="background" src="@Model.CurrentFrame" alt="">
             <img width="70px" id="cross" src="@Model.CurrentCross" alt="">
             <div id="pic-border">
                 <img id="face" id="cross" src="~/face.jpg" alt="">
             </div>
-            <form method="post">
+
+            <div id="uploadImageForm">
+                <form method="post" enctype="multipart/form-data" asp-controller="MakeIt" asp-action="UploadImage">
+                    <input id="inputBtn" type="file" name="imgFile" />
+                    <input id="uploadBtn" type="submit" value="Качи снимка." />
+                </form>
+            </div>
+
+            <form method="post" asp-action="SaveCurrentWork">
                 <textarea name="crossText" id="cross-text">@Model.CrossText</textarea>
                 <textarea name="afterCrossText" id="after-cross-text">@Model.AfterCrossText</textarea>
                 <textarea name="fullName" id="full-name">@Model.FullName</textarea>
@@ -57,6 +63,9 @@
                 <textarea name="mainText" id="main-text">@Model.CurrentText</textarea>
                 <textarea name="panahida" id="panahida">@Model.Panahida</textarea>
                 <textarea name="from" id="from">@Model.From</textarea>
+
+                <button type="submit" id="save-work"><i class="fas fa-save"></i></button>
+                @*<input type="submit" id="save-work" />*@
             </form>
 
         </div>

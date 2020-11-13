@@ -3,9 +3,11 @@ using Funeral.App.Enums;
 using Funeral.App.Services;
 using Funeral.App.TempData;
 using Funeral.App.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
 {
@@ -16,12 +18,14 @@ namespace Funeral.Web.Controllers
         private readonly IFramesService framesService;
         private readonly ICrossesService crossesService;
         private readonly ITextsService textsService;
+        private readonly IFileService fileService;
 
-        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService)
+        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService, IFileService fileService)
         {
             this.framesService = framesService;
             this.crossesService = crossesService;
             this.textsService = textsService;
+            this.fileService = fileService;
         }
 
         public IActionResult MakeIt()
@@ -88,7 +92,7 @@ namespace Funeral.Web.Controllers
             return RedirectToAction("MakeIt");
         }
 
-        public IActionResult ChangeToTexts(string textId)
+        public IActionResult ChangeToTexts()
         {
             tempData[User.Identity.Name].Elements = Elements.Texts;
 
@@ -117,6 +121,32 @@ namespace Funeral.Web.Controllers
         {
             var text = textsService.GetTextById(textId);
             tempData[User.Identity.Name].CurrentText = text;
+
+            return RedirectToAction("MakeIt");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImage(IFormFile imgFile)
+        {
+            var filePath = "/Pictures/UserImages/" + imgFile.FileName;
+            var targetDirectory = "Pictures/UserImages";
+
+            await fileService.UploadFile(imgFile, targetDirectory);
+
+            //fileService.SaveFramePathToDb(filePath);
+
+            return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult SaveCurrentWork(CurrentWorkInputModel input)
+        {
+            tempData[User.Identity.Name].CrossText = input.CrossText;
+            tempData[User.Identity.Name].AfterCrossText = input.AfterCrossText;
+            tempData[User.Identity.Name].FullName = input.FullName;
+            tempData[User.Identity.Name].Year = input.Year;
+            tempData[User.Identity.Name].CurrentText = input.MainText;
+            tempData[User.Identity.Name].Panahida = input.Panahida;
+            tempData[User.Identity.Name].From = input.From;
 
             return RedirectToAction("MakeIt");
         }

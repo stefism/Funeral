@@ -23,6 +23,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Pictures\Crosses\" />
+    <Folder Include="wwwroot\Pictures\Frames\" />
+    <Folder Include="wwwroot\Pictures\UserImages\" />
   </ItemGroup>
 
 </Project>
