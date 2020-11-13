@@ -16,10 +16,17 @@ namespace Funeral.App.Services
             this.db = db;
         }
 
+        public string GetCrossPathById(string crossId)
+        {
+            return db.Crosses.Where(c => c.Id == crossId)
+                .Select(c => c.FilePath).FirstOrDefault();
+        }
+
         public ICollection<AllCrossesViewModel> ShowAllCrosses()
         {
             var crosses = db.Crosses.Select(c => new AllCrossesViewModel
             {
+                CrossId = c.Id,
                 FilePath = c.FilePath
             }).ToList();
 

@@ -1,13 +1,11 @@
-﻿using Funeral.App.Services;
+﻿using Funeral.App;
+using Funeral.App.Enums;
+using Funeral.App.Services;
 using Funeral.App.TempData;
 using Funeral.App.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
 
 namespace Funeral.Web.Controllers
 {
@@ -16,37 +14,28 @@ namespace Funeral.Web.Controllers
         private static Dictionary<string, TempData> tempData = new Dictionary<string, TempData>();
 
         private readonly IFramesService framesService;
+        private readonly ICrossesService crossesService;
+        private readonly ITextsService textsService;
 
-        public MakeItController(IFramesService framesService) //
+        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService)
         {
             this.framesService = framesService;
+            this.crossesService = crossesService;
+            this.textsService = textsService;
         }
 
-        public IActionResult MakeIt(string element)
+        public IActionResult MakeIt()
         {
             var userName = User.Identity.Name;
 
-            if (!tempData.ContainsKey(userName))
-            {
-                tempData[userName] = new TempData
-                {
-                    CurrentFrame = "/Pictures/Frames/frame1.gif"
-                };
-            }
-
-            var viewModel = new MakeItViewModel
-            {
-                CurrentFrame = tempData[userName].CurrentFrame,
-                AllFrames = framesService.ShowAllFrames()
-            };
-
-
+            SetInitialValuesToTempData(userName);
+            var viewModel = AddValuesToModel(userName);
             return View(viewModel);
-        }
+        }      
 
         public IActionResult CreatePdf()
         {
-            
+
             HtmlToPdf converter = new HtmlToPdf();
 
             //string urlAddress = "https://www.abv.bg";
@@ -85,21 +74,91 @@ namespace Funeral.Web.Controllers
             return RedirectToAction("MakeIt");
         }
 
-        public IActionResult ChangeFrame(string frameId)
+        public IActionResult ChangeToCrosses()
         {
-            var userName = User.Identity.Name;
-
-            var framePath = framesService.GetFramePathById(frameId);
-
-            tempData[userName].CurrentFrame = framePath;
-
-            //var viewModel = new MakeItViewModel
-            //{
-            //    CurrentFrame = framePath,
-            //    AllFrames = framesService.ShowAllFrames()
-            //};
+            tempData[User.Identity.Name].Elements = Elements.Crosses;
 
             return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult ChangeToFrames()
+        {
+            tempData[User.Identity.Name].Elements = Elements.Frames;
+
+            return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult ChangeToTexts(string textId)
+        {
+            tempData[User.Identity.Name].Elements = Elements.Texts;
+
+            return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult ChangeFrame(string frameId)
+        {
+            var framePath = framesService.GetFramePathById(frameId);
+
+            tempData[User.Identity.Name].CurrentFrame = framePath;
+
+            return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult ChangeCross(string crossId)
+        {
+            var crossPath = crossesService.GetCrossPathById(crossId);
+
+            tempData[User.Identity.Name].CurrentCross = crossPath;
+
+            return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult ChangeText(string textId)
+        {
+            var text = textsService.GetTextById(textId);
+            tempData[User.Identity.Name].CurrentText = text;
+
+            return RedirectToAction("MakeIt");
+        }
+
+        private MakeItViewModel AddValuesToModel(string userName)
+        {
+            return new MakeItViewModel
+            {
+                CurrentFrame = tempData[userName].CurrentFrame,
+                CurrentCross = tempData[userName].CurrentCross,
+                CurrentText = tempData[userName].CurrentText,
+                CrossText = tempData[userName].CrossText,
+                AfterCrossText = tempData[userName].AfterCrossText,
+                FullName = tempData[userName].FullName,
+                Panahida = tempData[userName].Panahida,
+                From = tempData[userName].From,
+                Year = tempData[userName].Year,
+                AllFrames = framesService.ShowAllFrames(),
+                AllCrosses = crossesService.ShowAllCrosses(),
+                AllTexts = textsService.ShowAllTexts(),
+                Elements = tempData[userName].Elements,
+            };
+        }
+
+        private void SetInitialValuesToTempData(string userName)
+        {
+            if (!tempData.ContainsKey(userName))
+            {
+                tempData[userName] = new TempData
+                {
+                    CurrentFrame = StringConstants.DefaultFramePath,
+                    CurrentCross = StringConstants.DefaultCrossPath,
+                    CrossText = StringConstants.DefaultCrossText,
+                    AfterCrossText = StringConstants.DefaultAfterCrossText,
+                    FullName = StringConstants.DefaultFullName,
+                    Panahida = StringConstants.DefaultPanahidaText,
+                    From = StringConstants.DefaultFromText,
+                    Year = StringConstants.DefaultYearText,
+                    CurrentText = textsService.ReturnFirtsText(),
+                    Elements = Elements.Frames,
+                };
+            }
         }
     }
 }

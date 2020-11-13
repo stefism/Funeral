@@ -7,6 +7,8 @@ namespace Funeral.App.Services
 {
     public interface ICrossesService
     {
+        string GetCrossPathById(string crossId);
+
         ICollection<AllCrossesViewModel> ShowAllCrosses();
     }
 }

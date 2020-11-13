@@ -21,11 +21,11 @@
 }
 
 /*::-webkit-resizer {*/
-    /*border: 2px solid black;*/
-    /*background: gray;*/
-    /*box-shadow: 2px 2px 2px 2px gray;*/
-    /*outline: 3px solid yellow;*/
-    /*background-image: url(/resize2.png);
+/*border: 2px solid black;*/
+/*background: gray;*/
+/*box-shadow: 2px 2px 2px 2px gray;*/
+/*outline: 3px solid yellow;*/
+/*background-image: url(/resize2.png);
 }*/
 
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@500&display=swap');
@@ -117,7 +117,7 @@ aside {
 }
 
 #pic-border {
-    position: absolute;    
+    position: absolute;
     padding: 5px;
     border: 3px solid black;
     top: 300px;
@@ -206,6 +206,36 @@ aside {
     z-index: 4;
 }
 
+#save-work {
+    display: flex;
+    border: 2px solid rgba(40, 167, 69, 0.51);
+    border-radius: 60px;
+    position: absolute;
+    top: 1050px;
+    left: 130px;
+    z-index: 4;
+}
+
+#total-save {
+    display: flex;
+    border: 2px solid rgba(40, 167, 69, 0.51);
+    border-radius: 60px;
+    position: absolute;
+    top: 1050px;
+    left: 180px;
+    z-index: 4;
+}
+
+.fas {
+    font-size: 20px;
+    color: rgba(40, 167, 69, 0.51);
+    padding: 7px;
+}
+
+.fas:hover {
+    color: palevioletred;
+}
+
 #background {
     z-index: 0;
     border: 1px solid black;
@@ -237,10 +267,14 @@ aside {
     box-shadow: 1px 1px 5px rgb(85, 83, 83);
 }
 
-    .elements:hover {
-        box-shadow: 2px 2px 5px rgb(199, 42, 42);
-        cursor: pointer;
-    }
+.side-texts {
+    font-size: 10px;
+}
+
+.elements:hover {
+    box-shadow: 2px 2px 5px rgb(199, 42, 42);
+    cursor: pointer;
+}
 
 #background {
     padding: 10px;
@@ -268,6 +302,7 @@ footer {
 .dropdown {
     position: relative;
     display: inline-block;
+    z-index: 4;
 }
 
 .dropdown-content {
@@ -277,7 +312,7 @@ footer {
     border-radius: 10px;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 4;
 }
 
     .dropdown-content a {
@@ -285,16 +320,20 @@ footer {
         padding: 12px 16px;
         text-decoration: none;
         display: block;
+        z-index: 4;
     }
 
         .dropdown-content a:hover {
             background-color: blue;
+            z-index: 4;
         }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    z-index: 4;
 }
 
 .dropdown:hover .dropbtn {
+    z-index: 4;
     /*background-color: #3e8e41;*/
 }

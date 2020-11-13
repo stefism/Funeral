@@ -20,18 +20,7 @@ namespace Funeral.Controllers
         }
 
         public IActionResult Index()
-        {
-            var temp = new TempData
-            {
-                Name = "Proba",
-                Description = "Proba2"
-            };
-
-            virtualDb.TempDatas.Add(temp);
-            virtualDb.SaveChanges();
-
-            ViewData["Pr"] = virtualDb.TempDatas.Select(x => x.Description).FirstOrDefault();
-
+        {           
             return View();
         }
 
