@@ -21,6 +21,8 @@ namespace Funeral.App.ViewModels
 
         public string Year { get; set; }
 
+        public string Picture { get; set; }
+
         public string Panahida { get; set; }
 
         public string From { get; set; }

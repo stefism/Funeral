@@ -10,6 +10,8 @@ namespace Funeral.App
 
         public const string DefaultCrossPath = "/Pictures/Crosses/cross1.gif";
 
+        public const string DefaultPicturePath = "/Pictures/face.jpg";
+
         public const string DefaultCrossText = "ТЪЖЕН ПОМЕН";
 
         public const string DefaultAfterCrossText = "Изминаха 40 дни от смъртта на нашият скъп съпруг, баща и дядо";

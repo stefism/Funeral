@@ -1,12 +1,8 @@
-﻿using Funeral.App.Services;
+﻿using Funeral.App.Data;
+using Funeral.App.Services;
 using Funeral.App.ViewModels;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
@@ -31,7 +27,7 @@ namespace Funeral.Web.Controllers
             var model = new UploadFrameFilesViewModel();
             model.UploadMessage = "Изберете файл с рамка за качване.";
             model.AllFrames = framesService.ShowAllFrames();
-            
+
             return View(model);
         }
 
@@ -87,11 +83,11 @@ namespace Funeral.Web.Controllers
             var filePath = "/Pictures/Frames/" + imgFile.FileName;
             var targetDirectory = "Pictures/Frames";
 
-            await fileService.UploadFile(imgFile, targetDirectory);
+            await fileService.UploadFile(imgFile, targetDirectory);       
 
-            fileService.SaveFramePathToDb(filePath);
+            await fileService.SaveElementToDb("Frame", filePath);
 
-            return RedirectToAction("UploadFrame");           
+            return RedirectToAction("UploadFrame");
         }
 
         [HttpPost]
@@ -100,9 +96,9 @@ namespace Funeral.Web.Controllers
             var filePath = "/Pictures/Crosses/" + imgFile.FileName;
             var targetDirectory = "Pictures/Crosses";
 
-            await fileService.UploadFile(imgFile, targetDirectory);
+            await fileService.UploadFile(imgFile, targetDirectory);           
 
-            fileService.SaveCrossPathToDb(filePath);
+            await fileService.SaveElementToDb("Cross", filePath);
 
             return RedirectToAction("UploadCross");
         }

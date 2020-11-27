@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Funeral.App.Services;
-using Funeral.App.VirtualDb;
 
 namespace Funeral
 {
@@ -35,7 +34,7 @@ namespace Funeral
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddDbContext<VirtualDbContext>(opt => opt.UseInMemoryDatabase("Test"));
+            //services.AddDbContext<VirtualDbContext>(opt => opt.UseInMemoryDatabase("Test"));
             
             services.AddControllersWithViews();
             services.AddRazorPages();

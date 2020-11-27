@@ -1,12 +1,15 @@
 ﻿using Funeral.App;
+using Funeral.App.Data;
 using Funeral.App.Enums;
 using Funeral.App.Services;
 using Funeral.App.TempData;
 using Funeral.App.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
@@ -19,13 +22,15 @@ namespace Funeral.Web.Controllers
         private readonly ICrossesService crossesService;
         private readonly ITextsService textsService;
         private readonly IFileService fileService;
+        private readonly IWebHostEnvironment environment;
 
-        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService, IFileService fileService)
+        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService, IFileService fileService, IWebHostEnvironment environment)
         {
             this.framesService = framesService;
             this.crossesService = crossesService;
             this.textsService = textsService;
             this.fileService = fileService;
+            this.environment = environment;
         }
 
         public IActionResult MakeIt()
@@ -128,14 +133,26 @@ namespace Funeral.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile imgFile)
         {
-            var filePath = "/Pictures/UserImages/" + imgFile.FileName;
-            var targetDirectory = "Pictures/UserImages";
+            var path = $"{environment.WebRootPath}/Pictures/UserImages";
+
+            var dir = Directory.CreateDirectory($"{path}/{User.Identity.Name}/");
+
+            var filePath = $"/Pictures/UserImages/{User.Identity.Name}/" + imgFile.FileName;
+            var targetDirectory = $"Pictures/UserImages/{User.Identity.Name}";
 
             await fileService.UploadFile(imgFile, targetDirectory);
 
-            //fileService.SaveFramePathToDb(filePath);
+            tempData[User.Identity.Name].Picture = filePath;
+
+            await fileService.SaveElementToDb("Picture", filePath);
 
             return RedirectToAction("MakeIt");
+        }
+
+        public IActionResult SaveToDb(MakeItViewModel model)
+        {
+
+            return Redirect("MakeIt");
         }
 
         public IActionResult SaveCurrentWork(CurrentWorkInputModel input)
@@ -164,6 +181,7 @@ namespace Funeral.Web.Controllers
                 Panahida = tempData[userName].Panahida,
                 From = tempData[userName].From,
                 Year = tempData[userName].Year,
+                Picture = tempData[userName].Picture,
                 AllFrames = framesService.ShowAllFrames(),
                 AllCrosses = crossesService.ShowAllCrosses(),
                 AllTexts = textsService.ShowAllTexts(),
@@ -182,6 +200,7 @@ namespace Funeral.Web.Controllers
                     CrossText = StringConstants.DefaultCrossText,
                     AfterCrossText = StringConstants.DefaultAfterCrossText,
                     FullName = StringConstants.DefaultFullName,
+                    Picture = StringConstants.DefaultPicturePath,
                     Panahida = StringConstants.DefaultPanahidaText,
                     From = StringConstants.DefaultFromText,
                     Year = StringConstants.DefaultYearText,

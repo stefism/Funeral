@@ -30,6 +30,42 @@ namespace Funeral.App.Services
             }
         }
 
+        public async Task SaveElementToDb(string elementType, string input)
+        {    
+            if (elementType == "Cross")
+            {
+                var cross = new Cross
+                {
+                    FilePath = input,
+                };
+
+                await db.Crosses.AddAsync(cross);
+                await db.SaveChangesAsync();
+            }
+
+            else if (elementType == "Frame")
+            {
+                var frame = new Frame
+                {
+                    FilePath = input,
+                };
+
+                await db.Frames.AddAsync(frame);
+                await db.SaveChangesAsync();
+            }
+
+            else if (elementType == "Picture")
+            {
+                var picture = new Picture
+                {
+                    FilePath = input,
+                };
+
+                await db.Pictures.AddAsync(picture);
+                await db.SaveChangesAsync();
+            }
+        }
+
         public void SaveCrossPathToDb(string path)
         {
             var cross = new Cross

@@ -1,9 +1,4 @@
-﻿using Funeral.App.ViewModels;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace Funeral.App.Services
@@ -14,8 +9,10 @@ namespace Funeral.App.Services
 
         public void SaveFramePathToDb(string path);
 
-        void SaveCrossPathToDb(string path);
+        public void SaveCrossPathToDb(string path);
 
-        void DeleteFrameFile(string frameId);
+        public void DeleteFrameFile(string frameId);
+
+        public Task SaveElementToDb(string elementType, string path);
     }
 }

@@ -18,6 +18,18 @@ namespace Funeral.Data
 
         public DbSet<CustomText> CustomTexts { get; set; }
 
+        public DbSet<CrossText> CrossTexts { get; set; }
+
+        public DbSet<AfterCrossText> AfterCrossTexts { get; set; }
+
+        public DbSet<FullName> FullNames { get; set; }
+
+        public DbSet<Year> Years { get; set; }
+
+        public DbSet<Panahida> Panahidas { get; set; }
+
+        public DbSet<From> Froms { get; set; }
+
         public DbSet<Frame> Frames { get; set; }
 
         public DbSet<Obituary> Obituaries { get; set; }
