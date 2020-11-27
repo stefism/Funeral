@@ -1,5 +1,4 @@
 ﻿using Funeral.App;
-using Funeral.App.Data;
 using Funeral.App.Enums;
 using Funeral.App.Services;
 using Funeral.App.TempData;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
@@ -21,14 +21,16 @@ namespace Funeral.Web.Controllers
         private readonly IFramesService framesService;
         private readonly ICrossesService crossesService;
         private readonly ITextsService textsService;
+        private readonly IObituaryService obituaryService;
         private readonly IFileService fileService;
         private readonly IWebHostEnvironment environment;
 
-        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService, IFileService fileService, IWebHostEnvironment environment)
+        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService, IObituaryService obituaryService, IFileService fileService, IWebHostEnvironment environment)
         {
             this.framesService = framesService;
             this.crossesService = crossesService;
             this.textsService = textsService;
+            this.obituaryService = obituaryService;
             this.fileService = fileService;
             this.environment = environment;
         }
@@ -40,7 +42,7 @@ namespace Funeral.Web.Controllers
             SetInitialValuesToTempData(userName);
             var viewModel = AddValuesToModel(userName);
             return View(viewModel);
-        }      
+        }
 
         public IActionResult CreatePdf()
         {
@@ -144,13 +146,17 @@ namespace Funeral.Web.Controllers
 
             tempData[User.Identity.Name].Picture = filePath;
 
-            await fileService.SaveElementToDb("Picture", filePath);
+            //await fileService.SaveElementToDb("Picture", filePath);
 
             return RedirectToAction("MakeIt");
         }
-
-        public IActionResult SaveToDb(SaveToDbInputModel input)
+             
+        public IActionResult SaveToDbAsync(SaveToDbInputModel input)
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+            obituaryService.SaveToDbAsync(input, userId);
+
             return Redirect("MakeIt");
         }
 

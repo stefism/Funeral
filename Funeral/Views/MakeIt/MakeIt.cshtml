@@ -33,7 +33,7 @@
 
     <section id="design">
         <div id="main-window">
-           
+
             <img id="background" name="background" src="@Model.CurrentFrame" alt="">
             <img width="70px" id="cross" name="cross" src="@Model.CurrentCross" alt="">
             <div id="pic-border">
@@ -60,11 +60,23 @@
                 <button type="submit" id="save-work"><i class="fas fa-save"></i></button>
             </form>
 
-            <div id="total-save">
-                <a href=""><i class="fas fa-share-square"></i></a>
-            </div>
+            <form method="post" asp-action="SaveToDbAsync">
+                <span name="background" id="bg" value="@Model.CurrentFrame"></span>
+                <span name="cross" id="cr" value="@Model.CurrentCross"></span>
+                <span name="picture" id="pr" value="@Model.Picture"></span>
+                <span name="crossText" id="ct" value="@Model.CrossText"></span>
+                <span name="fullName" id="fn" value="@Model.FullName"></span>
+                <span name="year" id="ye" value="@Model.Year"></span>
+                <span name="mainText" id="mt" value="@Model.CurrentText"></span>
+                <span name="panahida" id="ph" value="@Model.Panahida"></span>
+                <span name="from" id="fr" value="@Model.From"></span>
+
+                <button type="submit" id="total-save"><i class="fas fa-share-square"></i></button>
+            </form>
 
         </div>
+
+
 
         <div id="items">
 
