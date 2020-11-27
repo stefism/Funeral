@@ -33,19 +33,11 @@
 
     <section id="design">
         <div id="main-window">
-
-            @*<div id="save-work">
-            <a href=""><i class="fas fa-save"></i></a>
-        </div>
-
-        <div id="total-save">
-            <a href=""><i class="fas fa-share-square"></i></a>
-        </div>*@
-
-            <img id="background" src="@Model.CurrentFrame" alt="">
-            <img width="70px" id="cross" src="@Model.CurrentCross" alt="">
+           
+            <img id="background" name="background" src="@Model.CurrentFrame" alt="">
+            <img width="70px" id="cross" name="cross" src="@Model.CurrentCross" alt="">
             <div id="pic-border">
-                <img id="face" src="@Model.Picture" alt="">
+                <img id="face" name="picture" src="@Model.Picture" alt="">
             </div>
 
             <div id="uploadImageForm">
@@ -53,6 +45,7 @@
                     <input id="inputBtn" type="file" name="imgFile" />
                     <button id="uploadBtn" type="submit"><i class="fas fa-upload"></i></button>
                 </form>
+
             </div>
 
             <form method="post" asp-action="SaveCurrentWork">

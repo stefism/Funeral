@@ -149,9 +149,8 @@ namespace Funeral.Web.Controllers
             return RedirectToAction("MakeIt");
         }
 
-        public IActionResult SaveToDb(MakeItViewModel model)
+        public IActionResult SaveToDb(SaveToDbInputModel input)
         {
-
             return Redirect("MakeIt");
         }
 
