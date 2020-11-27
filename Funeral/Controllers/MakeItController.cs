@@ -151,13 +151,13 @@ namespace Funeral.Web.Controllers
             return RedirectToAction("MakeIt");
         }
              
-        public IActionResult SaveToDbAsync(SaveToDbInputModel input)
+        public async Task<IActionResult> SaveToDataBaseAsync(SaveToDbInputModel input)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             
-            obituaryService.SaveToDbAsync(input, userId);
+            await obituaryService.SaveToDbAsync(input, userId);
 
-            return Redirect("MakeIt");
+            return Redirect("/");
         }
 
         public IActionResult SaveCurrentWork(CurrentWorkInputModel input)

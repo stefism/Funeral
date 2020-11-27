@@ -60,16 +60,17 @@
                 <button type="submit" id="save-work"><i class="fas fa-save"></i></button>
             </form>
 
-            <form method="post" asp-action="SaveToDbAsync">
-                <span name="background" id="bg" value="@Model.CurrentFrame"></span>
-                <span name="cross" id="cr" value="@Model.CurrentCross"></span>
-                <span name="picture" id="pr" value="@Model.Picture"></span>
-                <span name="crossText" id="ct" value="@Model.CrossText"></span>
-                <span name="fullName" id="fn" value="@Model.FullName"></span>
-                <span name="year" id="ye" value="@Model.Year"></span>
-                <span name="mainText" id="mt" value="@Model.CurrentText"></span>
-                <span name="panahida" id="ph" value="@Model.Panahida"></span>
-                <span name="from" id="fr" value="@Model.From"></span>
+            <form method="post" asp-action="SaveToDataBase">
+                <textarea hidden name="background" id="bg">@Model.CurrentFrame</textarea>
+                <textarea hidden name="cross" id="cr">@Model.CurrentCross</textarea>
+                <textarea hidden name="picture" id="pr">@Model.Picture</textarea>
+                <textarea hidden name="crossText" id="ct">@Model.CrossText</textarea>
+                <textarea hidden name="afterCrossText" id="ct">@Model.AfterCrossText</textarea>
+                <textarea hidden name="fullName" id="fn">@Model.FullName</textarea>
+                <textarea hidden name="year" id="ye">@Model.Year</textarea>
+                <textarea hidden name="mainText" id="mt">@Model.CurrentText</textarea>
+                <textarea hidden name="panahida" id="ph">@Model.Panahida</textarea>
+                <textarea hidden name="fromWhere" id="fr">@Model.From</textarea>
 
                 <button type="submit" id="total-save"><i class="fas fa-share-square"></i></button>
             </form>

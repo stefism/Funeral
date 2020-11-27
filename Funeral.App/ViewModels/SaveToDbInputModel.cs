@@ -20,6 +20,6 @@
 
         public string Panahida { get; set; }
 
-        public string From { get; set; }
+        public string FromWhere { get; set; }
     }
 }

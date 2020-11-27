@@ -1,10 +1,7 @@
 ﻿using Funeral.App.Data;
 using Funeral.App.ViewModels;
 using Funeral.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Funeral.App.Services
@@ -31,27 +28,13 @@ namespace Funeral.App.Services
             var pictureId = db.Pictures.Where(p => p.FilePath == input.Picture)
                 .Select(p => p.Id).FirstOrDefault();
 
-            if (textId == null)
-            {
-                var customText = new CustomText
-                {
-                    Text = input.MainText,
-                };
-
-                await db.CustomTexts.AddAsync(customText);
-                await db.SaveChangesAsync();
-
-                textId = customText.Id;
-            }
-
             var obituary = new Obituary
             {
                 UserId = userId,
                 FrameId = frameId,
-                TextTemplateId = textId,
                 CrossId = crossId,
                 PictureId = pictureId,
-                AfterCrossTexts = new AfterCrossText 
+                AfterCrossTexts = new AfterCrossText
                 {
                     Text = input.AfterCrossText,
                 },
@@ -61,7 +44,7 @@ namespace Funeral.App.Services
                 },
                 Froms = new From
                 {
-                    Text = input.From,
+                    Text = input.FromWhere,
                 },
                 FullNames = new FullName
                 {
@@ -76,6 +59,24 @@ namespace Funeral.App.Services
                     Text = input.Year,
                 },
             };
+
+            if (textId == null)
+            {
+                var customText = new CustomText
+                {
+                    Text = input.MainText,
+                };
+
+                await db.CustomTexts.AddAsync(customText);
+                await db.SaveChangesAsync();
+
+                textId = customText.Id;
+                obituary.CustomTextId = textId;
+            }
+            else
+            {
+                obituary.TextTemplateId = textId;
+            }
 
             await db.Obituaries.AddAsync(obituary);
             await db.SaveChangesAsync();
