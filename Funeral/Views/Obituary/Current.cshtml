@@ -1,0 +1,33 @@
+﻿@model Funeral.App.ViewModels.CurrentObituaryViewModel
+@{
+    ViewData["Title"] = "Вашият некролог";
+}
+
+<head>
+    <script src="https://kit.fontawesome.com/3c54b527d8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/Current.css">
+</head>
+
+<body>
+    <section id="design">
+        <div id="main-window">
+
+            <img id="background" name="background" src="@Model.Background" alt="">
+            <img width="70px" id="cross" name="cross" src="@Model.Cross" alt="">
+            <div id="pic-border">
+                <img id="face" name="picture" src="@Model.Picture" alt="">
+            </div>
+
+            <div id="text-elements">
+                <textarea name="crossText" id="cross-text">@Model.CrossText</textarea>
+                <textarea name="afterCrossText" id="after-cross-text">@Model.AfterCrossText</textarea>
+                <textarea name="fullName" id="full-name">@Model.FullName</textarea>
+                <textarea name="year" id="year">@Model.Year</textarea>
+                <textarea name="mainText" id="main-text">@Model.MainText</textarea>
+                <textarea name="panahida" id="panahida">@Model.Panahida</textarea>
+                <textarea name="from" id="from">@Model.FromWhere</textarea>
+            </div>
+
+        </div>
+    </section>
+</body>

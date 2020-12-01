@@ -7,6 +7,11 @@ namespace Funeral.App.Data
 {
     public class UserObituary
     {
+        public UserObituary()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
         public string Id { get; set; }
 

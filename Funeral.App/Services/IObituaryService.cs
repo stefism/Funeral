@@ -5,6 +5,8 @@ namespace Funeral.App.Services
 {
     public interface IObituaryService
     {
-        public Task SaveToDbAsync(SaveToDbInputModel input, string userId);
+        public Task<string> SaveToDbAsync(SaveToDbInputModel input, string userId);
+
+        public CurrentObituaryViewModel GetCurrent(string id);
     }
 }

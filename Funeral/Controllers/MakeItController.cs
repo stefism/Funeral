@@ -155,9 +155,9 @@ namespace Funeral.Web.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             
-            await obituaryService.SaveToDbAsync(input, userId);
+            var obituaryId = await obituaryService.SaveToDbAsync(input, userId);
 
-            return Redirect("/");
+            return Redirect($"/Obituary/Current?id={obituaryId}");
         }
 
         public IActionResult SaveCurrentWork(CurrentWorkInputModel input)
