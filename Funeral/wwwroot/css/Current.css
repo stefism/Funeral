@@ -24,8 +24,8 @@
 
 body {
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    max-height: 100%;
-    max-width: 1000px;
+    /*max-height: 100%;
+    max-width: 1000px;*/
     margin: 0 auto;
 }
 
@@ -33,6 +33,8 @@ body {
     display: flex;
     justify-content: center;
 }
+
+
 
 #main-window {
     display: flex;

@@ -1,5 +1,6 @@
 ﻿using Funeral.App.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Funeral.Web.Controllers
 {
@@ -17,6 +18,15 @@ namespace Funeral.Web.Controllers
             var viewModel = obituaryService.GetCurrent(id);
 
             return View(viewModel);
+        }
+
+        public IActionResult AllUserObituary()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+            var model = obituaryService.AllUserObituarys(userId);
+            
+            return View(model);
         }
     }
 }

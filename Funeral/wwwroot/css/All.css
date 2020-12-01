@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@500&display=swap');
+
+body {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+#all-obituarys {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#main-window {
+    display: flex;
+    width: 310px;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#background {
+    padding: 10px;
+    width: 300px;
+    z-index: 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 5px;
+    background: white;
+    box-shadow: 1px 1px 5px rgb(85, 83, 83);
+}
+
+#text-elements {
+    position: absolute;
+}
+
+#cross {
+    width: 30px;
+    position: absolute;
+    top: 25px;
+    left: 60px;
+    z-index: 4;
+}
+
+#cross-text {
+    position: absolute;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 165px;
+    height: 30px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
+    top: 30px;
+    left: 35px;
+    z-index: 1;
+}
+
+#after-cross-text {
+    position: absolute;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 135px;
+    height: 35px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 500;
+    top: 55px;
+    left: 40px;
+    z-index: 1;
+}
+
+#face {
+    width: 70px;
+    height: 100px;
+}
+
+#pic-border {
+    position: absolute;
+    padding: 5px;
+    border: 1px solid black;
+    top: 130px;
+    left: 190px;
+    z-index: 1;
+}
+
+#full-name {
+    position: absolute;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 145px;
+    height: 90px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bolder;
+    top: 120px;
+    left: -30px;
+    z-index: 1;
+}
+
+#year {
+    position: absolute;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 95px;
+    height: 20px;
+    text-align: left;
+    font-size: 8px;
+    font-weight: 500;
+    top: 210px;
+    left: -25px;
+    z-index: 1;
+}
+
+#main-text {
+    position: relative;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 190px;
+    height: 45px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 700;
+    top: 280px;
+    z-index: 1;
+}
+
+#panahida {
+    position: absolute;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 215px;
+    height: 30px;
+    text-align: center;
+    font-size: 7px;
+    font-weight: 500;
+    top: 350px;
+    left: -10px;
+    z-index: 1;
+}
+
+#from {
+    position: absolute;
+    overflow: hidden;
+    resize: auto;
+    border: none;
+    width: 95px;
+    height: 25px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    top: 385px;
+    left: 100px;
+    z-index: 1;
+}
+
+footer {
+    display: flex;
+    height: 30px;
+    background-image: linear-gradient(0deg, rgb(22, 106, 233), rgb(95, 192, 248));
+    align-items: center;
+    justify-content: center;
+}

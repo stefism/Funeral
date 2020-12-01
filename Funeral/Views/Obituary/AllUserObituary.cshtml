@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Funeral.App.ViewModels.CurrentObituaryViewModel>
+@{
+    ViewData["Title"] = "Всички Ваши некролози";
+}
+
+<head>
+    <script src="https://kit.fontawesome.com/3c54b527d8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/All.css">
+</head>
+
+<body>
+    <div id="all-obituarys">
+        @foreach (var obituary in Model)
+        {
+            <section id="design">
+                <div id="main-window">
+
+                    <img id="background" name="background" src="@obituary.Background" alt="">
+                    <img width="70px" id="cross" name="cross" src="@obituary.Cross" alt="">
+                    <div id="pic-border">
+                        <img id="face" name="picture" src="@obituary.Picture" alt="">
+                    </div>
+
+                    <div id="text-elements">
+                        <textarea name="crossText" id="cross-text">@obituary.CrossText</textarea>
+                        <textarea name="afterCrossText" id="after-cross-text">@obituary.AfterCrossText</textarea>
+                        <textarea name="fullName" id="full-name">@obituary.FullName</textarea>
+                        <textarea name="year" id="year">@obituary.Year</textarea>
+                        <textarea name="mainText" id="main-text">@obituary.MainText</textarea>
+                        <textarea name="panahida" id="panahida">@obituary.Panahida</textarea>
+                        <textarea name="from" id="from">@obituary.FromWhere</textarea>
+                    </div>
+
+                </div>
+            </section>
+        }
+    </div>
+</body>

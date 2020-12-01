@@ -1,6 +1,7 @@
 ﻿using Funeral.App.Data;
 using Funeral.App.ViewModels;
 using Funeral.Data;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,27 @@ namespace Funeral.App.Services
         public ObituaryService(ApplicationDbContext db)
         {
             this.db = db;
+        }
+
+        public IEnumerable<CurrentObituaryViewModel> AllUserObituarys(string userId)
+        {
+            var all = db.Obituaries.Where(o => o.UserId == userId)
+                .Select(o => new CurrentObituaryViewModel
+                {
+                    Id = o.Id,
+                    Background = o.Frame.FilePath,
+                    Cross = o.Cross.FilePath,
+                    CrossText = o.CrossTexts.Text,
+                    AfterCrossText = o.AfterCrossTexts.Text,
+                    Picture = o.Picture.FilePath,
+                    FullName = o.FullNames.Name,
+                    Year = o.Years.Text,
+                    MainText = o.TextTemplate.Text ?? o.CustomText.Text,
+                    Panahida = o.Panahidas.Text,
+                    FromWhere = o.Froms.Text,
+                }).ToList();
+
+            return all;
         }
 
         public CurrentObituaryViewModel GetCurrent(string id)
