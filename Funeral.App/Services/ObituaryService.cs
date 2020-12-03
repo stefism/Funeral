@@ -1,6 +1,7 @@
 ﻿using Funeral.App.Data;
 using Funeral.App.ViewModels;
 using Funeral.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace Funeral.App.Services
             this.db = db;
         }
 
-        public IEnumerable<CurrentObituaryViewModel> AllUserObituarys(string userId)
+        public async Task<IEnumerable<CurrentObituaryViewModel>> AllUserObituarysAsync(string userId)
         {
-            var all = db.Obituaries.Where(o => o.UserId == userId)
+            var all = await db.Obituaries.Where(o => o.UserId == userId)
                 .Select(o => new CurrentObituaryViewModel
                 {
                     Id = o.Id,
@@ -32,14 +33,14 @@ namespace Funeral.App.Services
                     MainText = o.TextTemplate.Text ?? o.CustomText.Text,
                     Panahida = o.Panahidas.Text,
                     FromWhere = o.Froms.Text,
-                }).ToList();
+                }).ToListAsync();
 
             return all;
         }
 
-        public CurrentObituaryViewModel GetCurrent(string id)
+        public async Task<CurrentObituaryViewModel> GetCurrentAsync(string id)
         {
-            var current = db.Obituaries.Where(o => o.Id == id)
+            var current = await db.Obituaries.Where(o => o.Id == id)
                 .Select(o => new CurrentObituaryViewModel
                 {
                     Id = o.Id,
@@ -53,7 +54,7 @@ namespace Funeral.App.Services
                     MainText = o.TextTemplate.Text ?? o.CustomText.Text,
                     Panahida = o.Panahidas.Text,
                     FromWhere = o.Froms.Text,
-                }).FirstOrDefault();
+                }).FirstOrDefaultAsync();
 
             return current;
         }

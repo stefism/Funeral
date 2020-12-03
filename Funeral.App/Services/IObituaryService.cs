@@ -8,8 +8,9 @@ namespace Funeral.App.Services
     {
         public Task<string> SaveToDbAsync(SaveToDbInputModel input, string userId);
 
-        public CurrentObituaryViewModel GetCurrent(string id);
+        public Task<CurrentObituaryViewModel> GetCurrentAsync(string id);
 
-        public IEnumerable<CurrentObituaryViewModel> AllUserObituarys(string userId);
+        public Task<IEnumerable<CurrentObituaryViewModel>>
+            AllUserObituarysAsync(string userId);
     }
 }

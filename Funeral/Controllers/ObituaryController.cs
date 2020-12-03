@@ -1,6 +1,7 @@
 ﻿using Funeral.App.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
 {
@@ -13,18 +14,18 @@ namespace Funeral.Web.Controllers
             this.obituaryService = obituaryService;
         }
 
-        public IActionResult Current(string id)
+        public async Task<IActionResult> Current(string id)
         {
-            var viewModel = obituaryService.GetCurrent(id);
+            var viewModel = await obituaryService.GetCurrentAsync(id);
 
             return View(viewModel);
         }
 
-        public IActionResult AllUserObituary()
+        public async Task<IActionResult> AllUserObituary()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             
-            var model = obituaryService.AllUserObituarys(userId);
+            var model = await obituaryService.AllUserObituarysAsync(userId);
             
             return View(model);
         }

@@ -1,10 +1,9 @@
-﻿using Funeral.App.Data;
-using Funeral.App.ViewModels;
+﻿using Funeral.App.ViewModels;
 using Funeral.Data;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Funeral.App.Services
 {
@@ -25,8 +24,8 @@ namespace Funeral.App.Services
 
         public ICollection<AllFramesViewModel> ShowAllFrames()
         {
-            var frames = db.Frames.Select(f => new AllFramesViewModel 
-            { 
+            var frames = db.Frames.Select(f => new AllFramesViewModel
+            {
                 FrameId = f.Id,
                 FilePath = f.FilePath
             }).ToList();
