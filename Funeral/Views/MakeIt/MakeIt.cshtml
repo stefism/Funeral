@@ -17,7 +17,7 @@
             <li><a href="/MakeIt/ChangeToTexts">Текстове</a></li>
             <li><a href="/MakeIt/ChangeToCrosses">Кръстове</a></li>
             <li><a href="/Obituary/AllUserObituary">Вашите некролози</a></li>
-            @if (User.Identity.Name == "stef4otm@gmail.com")
+            @if (User.IsInRole("Admin"))
             {
                 <div class="dropdown">
                     <button class="dropbtn">Администрация</button>

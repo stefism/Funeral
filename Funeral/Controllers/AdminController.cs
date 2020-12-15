@@ -1,12 +1,13 @@
-﻿using Funeral.App.Data;
-using Funeral.App.Services;
+﻿using Funeral.App.Services;
 using Funeral.App.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private readonly IFileService fileService;
@@ -83,7 +84,7 @@ namespace Funeral.Web.Controllers
             var filePath = "/Pictures/Frames/" + imgFile.FileName;
             var targetDirectory = "Pictures/Frames";
 
-            await fileService.UploadFile(imgFile, targetDirectory);       
+            await fileService.UploadFile(imgFile, targetDirectory);
 
             await fileService.SaveElementToDb("Frame", filePath);
 
@@ -96,7 +97,7 @@ namespace Funeral.Web.Controllers
             var filePath = "/Pictures/Crosses/" + imgFile.FileName;
             var targetDirectory = "Pictures/Crosses";
 
-            await fileService.UploadFile(imgFile, targetDirectory);           
+            await fileService.UploadFile(imgFile, targetDirectory);
 
             await fileService.SaveElementToDb("Cross", filePath);
 

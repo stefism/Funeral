@@ -1,3 +1,4 @@
+using Funeral.App;
 using Funeral.App.Services;
 using Funeral.Data;
 using Microsoft.AspNetCore.Builder;
@@ -26,9 +27,16 @@ namespace Funeral
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            //За ролите
+            //services.AddDefaultIdentity<IdentityUser>(IdentityOptionsProvider.GetIdentityOptions)
+            //    .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //Старото
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-           
+
             services.Configure<CookiePolicyOptions>(
                 options =>
                 {
