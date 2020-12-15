@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SelectPdf;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,15 +25,27 @@ namespace Funeral.Web.Controllers
         private readonly ITextsService textsService;
         private readonly IObituaryService obituaryService;
         private readonly IFileService fileService;
+        private readonly IUserPictureService userPictureService;
         private readonly IWebHostEnvironment environment;
 
-        public MakeItController(IFramesService framesService, ICrossesService crossesService, ITextsService textsService, IObituaryService obituaryService, IFileService fileService, IWebHostEnvironment environment)
+        private string UserId => 
+            User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+        public MakeItController(
+            IFramesService framesService, 
+            ICrossesService crossesService, 
+            ITextsService textsService, 
+            IObituaryService obituaryService, 
+            IFileService fileService,
+            IUserPictureService userPictureService,
+            IWebHostEnvironment environment)
         {
             this.framesService = framesService;
             this.crossesService = crossesService;
             this.textsService = textsService;
             this.obituaryService = obituaryService;
             this.fileService = fileService;
+            this.userPictureService = userPictureService;
             this.environment = environment;
         }
 
@@ -47,45 +58,11 @@ namespace Funeral.Web.Controllers
             return View(viewModel);
         }
 
-        public IActionResult CreatePdf()
+        public IActionResult ClearUserTempData()
         {
+            tempData.Remove(User.Identity.Name);
 
-            HtmlToPdf converter = new HtmlToPdf();
-
-            //string urlAddress = "https://www.abv.bg";
-
-            //string data = string.Empty;
-
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            //if (response.StatusCode == HttpStatusCode.OK)
-            //{
-            //    Stream receiveStream = response.GetResponseStream();
-            //    StreamReader readStream = null;
-
-            //    if (string.IsNullOrWhiteSpace(response.CharacterSet))
-            //        readStream = new StreamReader(receiveStream);
-            //    else
-            //        readStream = new StreamReader
-            //            (receiveStream, Encoding.GetEncoding(response.CharacterSet));
-
-            //    data = readStream.ReadToEnd();
-
-            //    response.Close();
-            //    readStream.Close();
-            //}
-
-            //converter.Options.Authentication.Username = "stef4otm@gmail.com";
-            //converter.Options.Authentication.Password = "Stefi_123";
-
-            PdfDocument doc = converter.ConvertUrl("https://www.abv.bg");
-
-            //PdfDocument doc = converter.ConvertHtmlString(data);
-            doc.Save("/Sample.pdf");
-            doc.Close();
-
-            return RedirectToAction("MakeIt");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult ChangeToCrosses()
@@ -140,6 +117,8 @@ namespace Funeral.Web.Controllers
         {
             string imageExt = Path.GetExtension(imgFile.FileName);
 
+            var picCount = userPictureService.GetUserPictureCount(UserId);
+
             if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
             {
                 ViewData["ErrorMessage"] = ErrorConstants.FileTypeError;
@@ -178,7 +157,7 @@ namespace Funeral.Web.Controllers
 
             tempData[User.Identity.Name].Picture = filePath;
 
-            await fileService.SaveElementToDb("Picture", filePath);
+            await fileService.SaveElementToDbAsync("Picture", filePath, UserId);
 
             return RedirectToAction("MakeIt");
         }

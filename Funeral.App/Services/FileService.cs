@@ -30,7 +30,7 @@ namespace Funeral.App.Services
             }
         }
 
-        public async Task SaveElementToDb(string elementType, string input)
+        public async Task SaveElementToDbAsync(string elementType, string input, string userId = null)
         {    
             if (elementType == "Cross")
             {
@@ -59,6 +59,7 @@ namespace Funeral.App.Services
                 var picture = new Picture
                 {
                     FilePath = input,
+                    UserId = userId,
                 };
 
                 await db.Pictures.AddAsync(picture);
@@ -66,41 +67,10 @@ namespace Funeral.App.Services
             }
         }
 
-        public void SaveCrossPathToDb(string path)
-        {
-            var cross = new Cross
-            {
-                FilePath = path
-            };
-
-            db.Crosses.Add(cross);
-            db.SaveChanges();
-        }
-
-        public void SaveFramePathToDb(string path)
-        {
-            var frame = new Frame
-            {
-                FilePath = path
-            };
-
-            db.Frames.Add(frame);
-            db.SaveChanges();
-        }
-
         public async Task UploadFile(IFormFile imgFile, string targetDirectory)
         {
             string imagePath = Path.Combine(webHost.WebRootPath, targetDirectory, imgFile.FileName);
-            // -> "Pictures/Frames"
-         
-          
-
-            //string imageExt = Path.GetExtension(imgFile.FileName);
-
-            //if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
-            //{
-            //    return;
-            //}
+            // -> "Pictures/Frames
 
             using (var uploadImage = new FileStream(imagePath, FileMode.Create))
             {

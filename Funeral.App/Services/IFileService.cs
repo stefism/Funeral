@@ -7,12 +7,8 @@ namespace Funeral.App.Services
     {
         public Task UploadFile(IFormFile imgFile, string targetDirectory);
 
-        public void SaveFramePathToDb(string path);
-
-        public void SaveCrossPathToDb(string path);
-
         public void DeleteFrameFile(string frameId);
 
-        public Task SaveElementToDb(string elementType, string path);
+        public Task SaveElementToDbAsync(string elementType, string path, string userId = null);
     }
 }

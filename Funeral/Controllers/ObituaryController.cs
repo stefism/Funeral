@@ -1,4 +1,5 @@
 ﻿using Funeral.App.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Funeral.Web.Controllers
             this.obituaryService = obituaryService;
         }
 
+        [Authorize]
         public async Task<IActionResult> Current(string id)
         {
             var viewModel = await obituaryService.GetCurrentAsync(id);
@@ -21,6 +23,7 @@ namespace Funeral.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> AllUserObituary()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

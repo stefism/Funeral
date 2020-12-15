@@ -86,7 +86,7 @@ namespace Funeral.Web.Controllers
 
             await fileService.UploadFile(imgFile, targetDirectory);
 
-            await fileService.SaveElementToDb("Frame", filePath);
+            await fileService.SaveElementToDbAsync("Frame", filePath);
 
             return RedirectToAction("UploadFrame");
         }
@@ -99,7 +99,7 @@ namespace Funeral.Web.Controllers
 
             await fileService.UploadFile(imgFile, targetDirectory);
 
-            await fileService.SaveElementToDb("Cross", filePath);
+            await fileService.SaveElementToDbAsync("Cross", filePath);
 
             return RedirectToAction("UploadCross");
         }

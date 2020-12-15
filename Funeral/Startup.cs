@@ -39,9 +39,7 @@ namespace Funeral
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
-
-            //services.AddControllersWithViews();
-
+          
             services.AddControllersWithViews(
                 options =>
                 {
@@ -61,6 +59,7 @@ namespace Funeral
             services.AddTransient<ICrossesService, CrossesService>();
             services.AddTransient<ITextsService, TextsService>();
             services.AddTransient<IObituaryService, ObituaryService>();
+            services.AddTransient<IUserPictureService, UserPictureService>();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 

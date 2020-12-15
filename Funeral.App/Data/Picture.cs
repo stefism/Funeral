@@ -19,6 +19,8 @@ namespace Funeral.App.Data
         [Required]
         public string FilePath { get; set; }
 
+        public string UserId { get; set; }
+
         public virtual ICollection<Obituary> Obituaries { get; set; }
     }
 }
