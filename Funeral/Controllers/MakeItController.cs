@@ -178,7 +178,7 @@ namespace Funeral.Web.Controllers
 
             tempData[User.Identity.Name].Picture = filePath;
 
-            //await fileService.SaveElementToDb("Picture", filePath);
+            await fileService.SaveElementToDb("Picture", filePath);
 
             return RedirectToAction("MakeIt");
         }

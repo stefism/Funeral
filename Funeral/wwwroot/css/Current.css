@@ -29,7 +29,13 @@ body {
     margin: 0 auto;
 }
 
+#mainMenu {
+    display: block;
+}
+
 #design {
+    width: 220mm;
+    height: 300mm;
     display: flex;
     justify-content: center;
 }
@@ -37,20 +43,34 @@ body {
 
 
 #main-window {
+    width: 209mm;
+    height: 296mm;
+    align-content: center;
     display: flex;
     position: relative;
     flex-direction: column;
     flex-grow: 1;
-    height: calc(100vh - 165px);
     align-items: center;
     overflow-y: scroll;
     overflow-x: scroll;
 }
 
+#background {
+    z-index: 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 1px 1px 5px rgb(85, 83, 83);
+    width: 206mm;
+    height: 292mm;
+    margin: 2.5mm 0mm 1.5mm 4mm;
+    padding: 5mm;
+}
+
 #cross {
     position: absolute;
     top: 70px;
-    left: 220px;
+    left: 160px;
     z-index: 4;
 }
 
@@ -59,13 +79,13 @@ body {
     overflow: hidden;
     resize: auto;
     border: none;
-    width: 460px;
+    width: 420px;
     height: 100px;
     text-align: left;
     font-size: 50px;
     font-weight: 700;
     top: 100px;
-    left: 320px;
+    left: 250px;
     z-index: 1;
 }
 
@@ -80,7 +100,7 @@ body {
     font-size: 16px;
     font-weight: 500;
     top: 170px;
-    left: 340px;
+    left: 270px;
     z-index: 1;
 }
 
@@ -94,7 +114,7 @@ body {
     padding: 5px;
     border: 3px solid black;
     top: 300px;
-    left: 550px;
+    left: 490px;
     z-index: 1;
 }
 
@@ -109,7 +129,7 @@ body {
     font-size: 40px;
     font-weight: bolder;
     top: 300px;
-    left: 170px;
+    left: 120px;
     z-index: 1;
 }
 
@@ -124,7 +144,7 @@ body {
     font-size: 16px;
     font-weight: 500;
     top: 480px;
-    left: 180px;
+    left: 140px;
     z-index: 1;
 }
 
@@ -153,7 +173,7 @@ body {
     font-size: 18px;
     font-weight: 500;
     top: 900px;
-    left: 240px;
+    left: 160px;
     z-index: 1;
 }
 
@@ -167,8 +187,8 @@ body {
     text-align: center;
     font-size: 26px;
     font-weight: 700;
-    top: 1050px;
-    left: 490px;
+    top: 1000px;
+    left: 400px;
     z-index: 1;
 }
 
@@ -190,17 +210,6 @@ body {
 
 .fas:hover {
     color: palevioletred;
-}
-
-#background {
-    z-index: 0;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 0 auto;
-    padding: 5px;
-    margin-top: 10px;
-    background: white;
-    box-shadow: 1px 1px 5px rgb(85, 83, 83);
 }
 
 #items {
@@ -230,11 +239,6 @@ body {
 .elements:hover {
     box-shadow: 2px 2px 5px rgb(199, 42, 42);
     cursor: pointer;
-}
-
-#background {
-    padding: 10px;
-    width: 800px;
 }
 
 footer {
