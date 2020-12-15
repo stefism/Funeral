@@ -92,13 +92,15 @@ namespace Funeral.App.Services
         {
             string imagePath = Path.Combine(webHost.WebRootPath, targetDirectory, imgFile.FileName);
             // -> "Pictures/Frames"
+         
+          
 
-            string imageExt = Path.GetExtension(imgFile.FileName);
+            //string imageExt = Path.GetExtension(imgFile.FileName);
 
-            if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
-            {
-                return; //TODO: Implement Error message!
-            }
+            //if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
+            //{
+            //    return;
+            //}
 
             using (var uploadImage = new FileStream(imagePath, FileMode.Create))
             {

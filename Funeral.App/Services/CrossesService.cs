@@ -1,7 +1,9 @@
 ﻿using Funeral.App.ViewModels;
 using Funeral.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Funeral.App.Services
 {
@@ -14,10 +16,10 @@ namespace Funeral.App.Services
             this.db = db;
         }
 
-        public string GetCrossPathById(string crossId)
+        public async Task<string> GetCrossPathByIdAsync(string crossId)
         {
-            return db.Crosses.Where(c => c.Id == crossId)
-                .Select(c => c.FilePath).FirstOrDefault();
+            return await db.Crosses.Where(c => c.Id == crossId)
+                .Select(c => c.FilePath).FirstOrDefaultAsync();
         }
 
         public ICollection<AllCrossesViewModel> ShowAllCrosses()

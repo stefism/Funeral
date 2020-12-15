@@ -51,6 +51,7 @@ namespace Funeral
             services.AddTransient<ICrossesService, CrossesService>();
             services.AddTransient<ITextsService, TextsService>();
             services.AddTransient<IObituaryService, ObituaryService>();
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

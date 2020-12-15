@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -115,11 +116,11 @@ namespace Funeral.Web.Controllers
             return RedirectToAction("MakeIt");
         }
 
-        public IActionResult ChangeCross(string crossId)
+        public async Task<IActionResult> ChangeCross(string crossId)
         {
-            var crossPath = crossesService.GetCrossPathById(crossId);
+            var crossPath = crossesService.GetCrossPathByIdAsync(crossId);
 
-            tempData[User.Identity.Name].CurrentCross = crossPath;
+            tempData[User.Identity.Name].CurrentCross = await crossPath;
 
             return RedirectToAction("MakeIt");
         }
@@ -134,7 +135,36 @@ namespace Funeral.Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile imgFile)
-        {
+        {           
+            string imageExt = Path.GetExtension(imgFile.FileName);
+
+            if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
+            {
+                ViewData["ErrorMessage"] = ErrorConstants.FileTypeError;
+                TempData.Add("ErrorMessage", ViewData["ErrorMessage"]);
+                
+                return RedirectToAction("Error", "Errors");
+            }
+
+            if (imgFile.Length > OtherConstants.PeoplePictureMaxSigeInBytes)
+            {
+                ViewData["ErrorMessage"] = ErrorConstants.FileMaxSizeError;
+                TempData.Add("ErrorMessage", ViewData["ErrorMessage"]);
+
+                return RedirectToAction("Error", "Errors");
+            }
+
+            var stream = imgFile.OpenReadStream();
+            bool isImage = IsImage(stream);
+
+            if (!isImage)
+            {
+                ViewData["ErrorMessage"] = ErrorConstants.ImageIsNotImage;
+                TempData.Add("ErrorMessage", ViewData["ErrorMessage"]);
+
+                return RedirectToAction("Error", "Errors");
+            }
+
             var path = $"{environment.WebRootPath}/Pictures/UserImages";
 
             var dir = Directory.CreateDirectory($"{path}/{User.Identity.Name}/");
@@ -150,11 +180,11 @@ namespace Funeral.Web.Controllers
 
             return RedirectToAction("MakeIt");
         }
-             
+
         public async Task<IActionResult> SaveToDataBaseAsync(SaveToDbInputModel input)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            
+
             var obituaryId = await obituaryService.SaveToDbAsync(input, userId);
 
             return Redirect($"/Obituary/Current?id={obituaryId}");
@@ -171,6 +201,33 @@ namespace Funeral.Web.Controllers
             tempData[User.Identity.Name].From = input.From;
 
             return RedirectToAction("MakeIt");
+        }
+
+        private bool IsImage(Stream stream)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+
+            List<string> jpg = new List<string> { "FF", "D8" };
+            List<string> bmp = new List<string> { "42", "4D" };
+            List<string> gif = new List<string> { "47", "49", "46" };
+            List<string> png = new List<string> { "89", "50", "4E", "47", "0D", "0A", "1A", "0A" };
+            List<List<string>> imgTypes = new List<List<string>> { jpg, bmp, gif, png };
+
+            List<string> bytesIterated = new List<string>();
+
+            for (int i = 0; i < 8; i++)
+            {
+                string bit = stream.ReadByte().ToString("X2");
+                bytesIterated.Add(bit);
+
+                bool isImage = imgTypes.Any(img => !img.Except(bytesIterated).Any());
+                if (isImage)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private MakeItViewModel AddValuesToModel(string userName)

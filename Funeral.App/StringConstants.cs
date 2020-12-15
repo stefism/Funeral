@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Funeral.App
+﻿namespace Funeral.App
 {
     public static class StringConstants
     {

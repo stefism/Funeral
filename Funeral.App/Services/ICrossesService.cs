@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Funeral.App.Services
 {
     public interface ICrossesService
     {
-        string GetCrossPathById(string crossId);
+        Task<string> GetCrossPathByIdAsync(string crossId);
 
         ICollection<AllCrossesViewModel> ShowAllCrosses();
     }
