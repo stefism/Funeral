@@ -1,4 +1,4 @@
-﻿namespace Funeral.App
+﻿namespace Funeral.App.GlobalConstants
 {
     public static class ErrorConstants
     {
@@ -7,5 +7,13 @@
         public const string FileMaxSizeError = "Файла е твърде голям. Максималната големина на файла не трябва да надвишава 1 мега байт.";
 
         public const string ImageIsNotImage = "Изглежда файла, който се опитвате да качите не съдържа изображение. Ако сте сменили разширението на файла но в него няма картинка, няма да успеете да го качите.";
+
+        public const string UsernameMustBe30Characters = "Потребителското име трябва да бъде с максимална дължина 30 символа.";
+
+        public const string PasswordMustBeBetween6And100Characters = "Паролата трябва да бъде с дължжина между {2} и {1} символа.";
+
+        public const string PasswordIsNotMatch = "Двете въведени пароли не си съвпадат.";
+
+        public const string InvalidEmail = "И-мейл адреса, който въвеждате е невалиден. Моля, въведете валиден И-мейл адрес.";
     }
 }

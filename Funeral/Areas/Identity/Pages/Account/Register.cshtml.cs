@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Funeral.App.GlobalConstants;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -46,24 +47,24 @@ namespace Funeral.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required, MinLength(3)]
-            [MaxLength(30, ErrorMessage = "Username must be max 30 characters")]
-            [Display(Name = "Username")]
+            [MaxLength(30, ErrorMessage = ErrorConstants.UsernameMustBe30Characters)]
+            [Display(Name = "Потребителско име")]
             public string Username { get; set; }
 
             [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [EmailAddress(ErrorMessage = ErrorConstants.InvalidEmail)]
+            [Display(Name = "И-мейл")]
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = ErrorConstants.PasswordMustBeBetween6And100Characters, MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Потвърди паролата")]
+            [Compare("Password", ErrorMessage = ErrorConstants.PasswordIsNotMatch)]
             public string ConfirmPassword { get; set; }
         }
 

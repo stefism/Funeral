@@ -1,4 +1,4 @@
-﻿namespace Funeral.App
+﻿namespace Funeral.App.GlobalConstants
 {
     public static class StringConstants
     {

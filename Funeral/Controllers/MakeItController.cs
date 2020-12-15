@@ -1,5 +1,5 @@
-﻿using Funeral.App;
-using Funeral.App.Enums;
+﻿using Funeral.App.Enums;
+using Funeral.App.GlobalConstants;
 using Funeral.App.Services;
 using Funeral.App.TempData;
 using Funeral.App.ViewModels;
@@ -137,14 +137,14 @@ namespace Funeral.Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile imgFile)
-        {           
+        {
             string imageExt = Path.GetExtension(imgFile.FileName);
 
             if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
             {
                 ViewData["ErrorMessage"] = ErrorConstants.FileTypeError;
                 TempData.Add("ErrorMessage", ViewData["ErrorMessage"]);
-                
+
                 return RedirectToAction("Error", "Errors");
             }
 
