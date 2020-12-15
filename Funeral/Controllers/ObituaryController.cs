@@ -29,5 +29,10 @@ namespace Funeral.Web.Controllers
             
             return View(model);
         }
+
+        public IActionResult Help()
+        {
+            return View();
+        }
     }
 }

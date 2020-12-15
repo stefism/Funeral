@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Funeral</title>
+    <title>@ViewData["Title"] - Сайт за некролози</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/3c54b527d8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+            <div id="mainMenu" class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><b>НЕКРОЛОЗИ</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -20,15 +21,18 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Начало</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Поверителност</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-user-secret"></i> Поверителност</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Obituary" asp-action="Help"><i class="fas fa-info-circle"></i> Помощ</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MakeIt" asp-action="MakeIt">Направи си</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MakeIt" asp-action="MakeIt"><i class="fas fa-poll-h"></i> Направи си</a>
                             </li>
                         }
                     </ul>

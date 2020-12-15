@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Вход в сайта.";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,7 +10,7 @@
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
+                <h5>Използвайте Вашите данни за да влезете:</h5>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -32,14 +32,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <button type="submit" class="btn btn-primary">Вход</button>
                 </div>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Забравили сте си паролата?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрация на нов потребител.</a>
                     </p>
                 </div>
             </form>
@@ -47,16 +47,22 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to log in.</h4>
+            <h4>Уважаеми потребители</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
+                            Този сайт е все още в процес на разработка, затова някои от неговите функционалности може да не работят спрямо Вашите очаквания, за което молим за извинение.
                         </p>
+                        <p>
+                            Амбицията на създателите на сайта е той да продължи да се развива и да Ви улеснява, като предлага една необходима и лесна за ползване услуга, като също така я поддържа напълно безплатна. Средствата необходими за това идват единствено от Вашата добра воля за дарение.
+                        </p>
+                        <p>
+                            Ако смятате, че си заслужава да има такъв сайт и за да можете да го ползватате и следващия път когато Ви потрябва, бихте могли при желание, да направите дарение на създателите на сайта, спрямо Вашите възможности.
+                        </p>
+                        <partial name="_DonatePartial" />
                     </div>
                 }
                 else

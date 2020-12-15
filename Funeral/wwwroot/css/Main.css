@@ -37,6 +37,10 @@ body {
     margin: 0 auto;
 }
 
+#mainMenu {
+    display: block;
+}
+
 aside {
     display: flex;
 }
@@ -240,9 +244,9 @@ aside {
     padding: 7px;
 }
 
-.fas:hover {
-    color: palevioletred;
-}
+    .fas:hover {
+        color: palevioletred;
+    }
 
 #background {
     z-index: 0;
