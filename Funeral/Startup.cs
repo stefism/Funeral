@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,12 +28,7 @@ namespace Funeral
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
-            //За ролите
-            //services.AddDefaultIdentity<IdentityUser>(IdentityOptionsProvider.GetIdentityOptions)
-            //    .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //Старото
+          
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -44,15 +40,21 @@ namespace Funeral
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
+
+            services.AddControllersWithViews(
+                options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                }).AddRazorRuntimeCompilation();
+
+            services.AddRazorPages();
 
             //Anti forgery.
             services.AddAntiforgery(opt =>
             {
                 opt.HeaderName = "X-CSRF-TOKEN";
             });
-
-            services.AddRazorPages();
 
             services.AddTransient<IFramesService, FramesService>();
             services.AddTransient<IFileService, FileService>();

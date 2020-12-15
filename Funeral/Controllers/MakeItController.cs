@@ -3,6 +3,7 @@ using Funeral.App.Enums;
 using Funeral.App.Services;
 using Funeral.App.TempData;
 using Funeral.App.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Funeral.Web.Controllers
 {
+    [Authorize]
     public class MakeItController : Controller
     {
         private static Dictionary<string, TempData> tempData = new Dictionary<string, TempData>();
