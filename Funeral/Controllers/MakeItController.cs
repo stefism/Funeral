@@ -119,6 +119,14 @@ namespace Funeral.Web.Controllers
 
             var picCount = userPictureService.GetUserPictureCount(UserId);
 
+            if (picCount >= OtherConstants.MaxNumberOfUserPicture)
+            {
+                ViewData["ErrorMessage"] = ErrorConstants.MaxUserPictureError;
+                TempData.Add("ErrorMessage", ViewData["ErrorMessage"]);
+
+                return RedirectToAction("Error", "Errors");
+            }
+
             if (imageExt != ".jpg" && imageExt != ".png" && imageExt != ".gif")
             {
                 ViewData["ErrorMessage"] = ErrorConstants.FileTypeError;

@@ -1,0 +1,13 @@
+﻿.deletable {
+    color: #d7d4d4;
+    position: relative;
+    right: 50px;
+    bottom: -200px;
+    z-index: 1;
+    font-size: 22px;
+}
+
+    .deletable:hover {
+        color: red;
+        cursor: pointer;
+    }

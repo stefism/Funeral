@@ -15,5 +15,9 @@
         public const string PasswordIsNotMatch = "Двете въведени пароли не си съвпадат.";
 
         public const string InvalidEmail = "И-мейл адреса, който въвеждате е невалиден. Моля, въведете валиден И-мейл адрес.";
+
+        public const string RequiredField = "Задължително трябва да попълните това поле.";
+
+        public const string MaxUserPictureError = "Надвишавате максималното количество от 5 снимки, които можете да качите. Моля, изтрийте снимка от архива си, за да можете да качите нова.";
     }
 }

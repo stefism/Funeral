@@ -1,4 +1,8 @@
-﻿#inputBtn {
+﻿#mainMenu {
+    display: block;
+}
+
+#inputBtn {
     color: white;
     background-color: deepskyblue;
     border: 0px;
@@ -31,7 +35,7 @@
     position: relative;
 }
 
-.fas {
+.deletable {
     color: #d7d4d4;
     position: relative;
     right: 60px;
@@ -40,7 +44,7 @@
     font-size: 22px;
 }
 
-.fas:hover {
+.deletable:hover {
     color: red;
     cursor: pointer;
 }

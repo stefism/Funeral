@@ -46,12 +46,12 @@ namespace Funeral.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = ErrorConstants.RequiredField)]
             [EmailAddress(ErrorMessage = ErrorConstants.InvalidEmail)]
             [Display(Name = "И-мейл")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = ErrorConstants.RequiredField)]
             [StringLength(100, ErrorMessage = ErrorConstants.PasswordMustBeBetween6And100Characters, MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Парола")]

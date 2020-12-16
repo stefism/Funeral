@@ -9,6 +9,8 @@ namespace Funeral.App.Services
 
         public void DeleteFrameFile(string frameId);
 
+        public Task DeleteUserPictureFileAsync(string pictureId);
+
         public Task SaveElementToDbAsync(string elementType, string path, string userId = null);
     }
 }

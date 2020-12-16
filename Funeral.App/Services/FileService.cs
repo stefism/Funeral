@@ -3,6 +3,7 @@ using Funeral.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -28,6 +29,23 @@ namespace Funeral.App.Services
             {
                 File.Delete(filePath);
             }
+        }
+
+        public async Task DeleteUserPictureFileAsync(string pictureId)
+        {
+            var userPicture = db.Pictures
+                .Where(p => p.Id == pictureId).FirstOrDefault();
+
+            var userPicturePath = userPicture.FilePath;
+            string filePath = "wwwroot" + userPicturePath;
+
+            if (filePath != null)
+            {
+                File.Delete(filePath);
+            }
+
+            db.Pictures.Remove(userPicture);
+            await db.SaveChangesAsync();
         }
 
         public async Task SaveElementToDbAsync(string elementType, string input, string userId = null)

@@ -1,0 +1,16 @@
+﻿@model Funeral.App.ViewModels.UserPictureViewModel
+@{
+    ViewData["Title"] = "Премахване на потребителска снимка";
+}
+
+<h2>Внимание! Показаната по-долу Ваша снимка ще бъде премахната.</h2>
+<p>Моля имайте предвид, че ако имате некролог, който съдържа въпросната снимка, то тя ще бъде премахната от некролога, като на нейно място ще се появи изображението по подразбиране.</p>
+<br />
+<h5>Моля потвърдете премахването.</h5>
+<form method="post">
+    <input class="invisible" name="pictureId" value="@Model.PictureId" />
+    <button type="submit" class="btn btn-danger" asp-controller="UserPictures" asp-action="DoDeleteUserPicture">Премахни</button>
+</form>
+<hr />
+
+<img class="frame" width="500px" src="@Model.PictureFilePath" alt="Alternate Text" />

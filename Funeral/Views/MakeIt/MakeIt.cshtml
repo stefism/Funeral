@@ -5,26 +5,26 @@
 }
 <!DOCTYPE html>
 <html>
-<head>
-    
+<head>  
     <link rel="stylesheet" href="~/css/Main.css">
 </head>
 <body>
     <aside id="menu-items">
 
         <ul>
-            <li><a href="/MakeIt/ChangeToFrames">Рамки</a></li>
-            <li><a href="/MakeIt/ChangeToTexts">Текстове</a></li>
-            <li><a href="/MakeIt/ChangeToCrosses">Кръстове</a></li>
-            <li><a href="/Obituary/AllUserObituary">Вашите некролози</a></li>
+            <li><a asp-controller="MakeIt" asp-action="ChangeToFrames">Рамки</a></li>
+            <li><a asp-controller="MakeIt" asp-action="ChangeToTexts">Текстове</a></li>
+            <li><a asp-controller="MakeIt" asp-action="ChangeToCrosses">Кръстове</a></li>
+            <li><a asp-controller="Obituary" asp-action="AllUserObituary">Вашите некролози</a></li>
+            <li><a asp-controller="UserPictures" asp-action="AllUserPictures">Вашите снимки</a></li>
             @if (User.IsInRole("Admin"))
             {
                 <div class="dropdown">
                     <button class="dropbtn">Администрация</button>
                     <div class="dropdown-content">
-                        <a href="/Admin/UploadFrame">Качване на рамка</a>
-                        <a href="/Admin/UploadCross">Качване на кръст</a>
-                        <a href="/Admin/UploadText">Качване на текст</a>
+                        <a asp-controller="Admin" asp-action="UploadFrame">Качване на рамка</a>
+                        <a asp-controller="Admin" asp-action="UploadCross">Качване на кръст</a>
+                        <a asp-controller="Admin" asp-action="UploadText">Качване на текст</a>
                     </div>
                 </div>
             }
