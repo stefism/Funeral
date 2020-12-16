@@ -46,11 +46,6 @@ namespace Funeral.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required, MinLength(3)]
-            [MaxLength(30, ErrorMessage = ErrorConstants.UsernameMustBe30Characters)]
-            [Display(Name = "Потребителско име")]
-            public string Username { get; set; }
-
             [Required]
             [EmailAddress(ErrorMessage = ErrorConstants.InvalidEmail)]
             [Display(Name = "И-мейл")]
