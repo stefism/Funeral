@@ -50,9 +50,19 @@
             </div>
 
             <form method="post" asp-action="SaveCurrentWork">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
                 <textarea name="crossText" id="cross-text">@Model.CrossText</textarea>
                 <textarea name="afterCrossText" id="after-cross-text">@Model.AfterCrossText</textarea>
-                <textarea name="fullName" id="full-name">@Model.FullName</textarea>
+
+
+                <div>
+                    <textarea asp-for="FullName" name="fullName" id="full-name"></textarea>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                
+
                 <textarea name="year" id="year">@Model.Year</textarea>
                 <textarea name="mainText" id="main-text">@Model.CurrentText</textarea>
                 <textarea name="panahida" id="panahida">@Model.Panahida</textarea>

@@ -27,10 +27,18 @@ namespace Funeral.Web.Controllers
         public async Task<IActionResult> AllUserObituary()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            
+
             var model = await obituaryService.AllUserObituarysAsync(userId);
-            
+
             return View(model);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DeleteObituary(string id)
+        {
+            await obituaryService.DeleteCurrentUserObituaryAsync(id);
+
+            return RedirectToAction(nameof(AllUserObituary));
         }
 
         public IActionResult Help()

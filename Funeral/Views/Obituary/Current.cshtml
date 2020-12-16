@@ -31,8 +31,34 @@
 
         </div>
     </section>
-    <button class="btn btn-success" type="button" id="btn">Направи PDF файл.</button>
+
+    <div class="row">
+        <button class="btn btn-success mr-3" type="button" id="btn">Направи PDF файл.</button>
+        <button data-toggle="modal" data-target="#deleteObituary" type="submit" class="btn btn-danger">Премахни некролога</button>
+    </div>
+
 </body>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteObituary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Моля, потвърдете премахването?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Текущият некролог ще бъде окончателно премахнат. Налистина ли желаете да го премахнете?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Затваряне</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href = '/Obituary/DeleteObituary?id=@Model.Id'">Потвърждавам</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script>

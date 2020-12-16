@@ -17,6 +17,18 @@ namespace Funeral.App.Services
             this.db = db;
         }
 
+        public async Task DeleteCurrentUserObituaryAsync(string id)
+        {
+            var obituary = db.Obituaries.Where(o => o.Id == id).FirstOrDefault();
+
+            var userObituarys = db.UserObituaries
+                .Where(x => x.ObituaryId == id).FirstOrDefault();
+
+            db.UserObituaries.Remove(userObituarys);
+            db.Obituaries.Remove(obituary);
+            await db.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<CurrentObituaryViewModel>> AllUserObituarysAsync(string userId)
         {
             var all = await db.Obituaries.Where(o => o.UserId == userId)

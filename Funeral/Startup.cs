@@ -1,4 +1,5 @@
 using Funeral.App;
+using Funeral.App.SendGrid;
 using Funeral.App.Services;
 using Funeral.Data;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +29,7 @@ namespace Funeral
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-          
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -39,7 +40,7 @@ namespace Funeral
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
-          
+
             services.AddControllersWithViews(
                 options =>
                 {
@@ -53,6 +54,8 @@ namespace Funeral
             {
                 opt.HeaderName = "X-CSRF-TOKEN";
             });
+
+            services.AddTransient<IEmailSender>(es => new SendGridEmailSender(Credential.ApiKey));
 
             services.AddTransient<IFramesService, FramesService>();
             services.AddTransient<IFileService, FileService>();

@@ -1,6 +1,7 @@
 ﻿using Funeral.App.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Funeral.App.ViewModels
@@ -17,6 +18,9 @@ namespace Funeral.App.ViewModels
 
         public string AfterCrossText { get; set; }
 
+        [Required]
+        [MinLength(3)]
+        [MaxLength(50)]
         public string FullName { get; set; }
 
         public string Year { get; set; }

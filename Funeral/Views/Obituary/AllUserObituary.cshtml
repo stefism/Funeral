@@ -12,27 +12,28 @@
     <div id="all-obituarys">
         @foreach (var obituary in Model)
         {
-            <section id="design">
-                <div id="main-window">
+        <section id="design">
+            <div id="main-window">
 
-                    <img id="background" name="background" src="@obituary.Background" alt="">
-                    <img width="70px" id="cross" name="cross" src="@obituary.Cross" alt="">
-                    <div id="pic-border">
-                        <img id="face" name="picture" src="@obituary.Picture" alt="">
-                    </div>
-
-                    <div id="text-elements">
-                        <textarea name="crossText" id="cross-text">@obituary.CrossText</textarea>
-                        <textarea name="afterCrossText" id="after-cross-text">@obituary.AfterCrossText</textarea>
-                        <textarea name="fullName" id="full-name">@obituary.FullName</textarea>
-                        <textarea name="year" id="year">@obituary.Year</textarea>
-                        <textarea name="mainText" id="main-text">@obituary.MainText</textarea>
-                        <textarea name="panahida" id="panahida">@obituary.Panahida</textarea>
-                        <textarea name="from" id="from">@obituary.FromWhere</textarea>
-                    </div>
-
+                <img id="background" name="background" src="@obituary.Background" alt="">
+                <img width="70px" id="cross" name="cross" src="@obituary.Cross" alt="">
+                <div id="pic-border">
+                    <img id="face" name="picture" src="@obituary.Picture" alt="">
                 </div>
-            </section>
+
+                <div id="text-elements">
+                    <textarea name="crossText" id="cross-text">@obituary.CrossText</textarea>
+                    <textarea name="afterCrossText" id="after-cross-text">@obituary.AfterCrossText</textarea>
+                    <textarea name="fullName" id="full-name">@obituary.FullName</textarea>
+                    <textarea name="year" id="year">@obituary.Year</textarea>
+                    <textarea name="mainText" id="main-text">@obituary.MainText</textarea>
+                    <textarea name="panahida" id="panahida">@obituary.Panahida</textarea>
+                    <textarea name="from" id="from">@obituary.FromWhere</textarea>
+                </div>
+            </div>
+            <a asp-controller="Obituary" asp-action="Current" asp-route-id="@obituary.Id"><i class="deletable fas fa-search-plus"></i></a>
+
+        </section>
         }
     </div>
 </body>

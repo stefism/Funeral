@@ -115,6 +115,14 @@ namespace Funeral.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile imgFile)
         {
+            if (imgFile == null)
+            {
+                ViewData["ErrorMessage"] = ErrorConstants.NoSelectedFileError;
+                TempData.Add("ErrorMessage", ViewData["ErrorMessage"]);
+
+                return RedirectToAction("Error", "Errors");
+            }
+
             string imageExt = Path.GetExtension(imgFile.FileName);
 
             var picCount = userPictureService.GetUserPictureCount(UserId);

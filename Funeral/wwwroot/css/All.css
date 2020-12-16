@@ -23,6 +23,20 @@ body {
     margin-bottom: 15px;
 }
 
+.deletable {
+    color: #d7d4d4;
+    position: relative;
+    right: -50px;
+    bottom: 60px;
+    z-index: 1;
+    font-size: 22px;
+}
+
+    .deletable:hover {
+        color: red;
+        cursor: pointer;
+    }
+
 #background {
     padding: 10px;
     width: 300px;
