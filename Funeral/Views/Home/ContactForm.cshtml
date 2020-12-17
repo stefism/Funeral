@@ -1,0 +1,24 @@
+﻿@model Funeral.App.ViewModels.EmailInputModel
+
+@{
+    ViewData["Title"] = "Контакт с нас:";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<form method="post" asp-action="SendFromGmail">
+    <div class="form-group">
+        <label asp-for="Subject"></label>
+        <input asp-for="Subject" class="form-control" />
+        <span asp-validation-for="Subject" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Message"></label>
+        <textarea asp-for="Message" class="form-control" rows="15"></textarea>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Изпрати</button>
+</form>

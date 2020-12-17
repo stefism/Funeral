@@ -47,13 +47,15 @@
         </main>
     </div>
 
-    <footer >
+    <footer>
         <div class="container text-black-50 text-center">
-            &copy; 2020 - Сайт за некролози - <a asp-area="" asp-controller="Home" asp-action="Privacy">Общи условия</a>
+            &copy; @DateTime.Now.Year - Сайт за некролози - <a asp-area="" asp-controller="Home" asp-action="Privacy">Общи условия</a> | <a asp-area="" asp-controller="Home" asp-action="ContactForm">Контактна форма</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/jquery.validate.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

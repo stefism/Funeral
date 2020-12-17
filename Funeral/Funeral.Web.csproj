@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>***</UserSecretsId>
+    <UserSecretsId>-</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-    <ApplicationInsightsResourceId>***</ApplicationInsightsResourceId>
+    <ApplicationInsightsResourceId>-</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>

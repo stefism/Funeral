@@ -70,6 +70,7 @@ namespace Funeral
             services.AddTransient<ITextsService, TextsService>();
             services.AddTransient<IObituaryService, ObituaryService>();
             services.AddTransient<IUserPictureService, UserPictureService>();
+            services.AddTransient<IGmailService, MailFromGmailService>();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
