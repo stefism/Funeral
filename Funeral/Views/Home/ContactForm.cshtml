@@ -4,10 +4,12 @@
     ViewData["Title"] = "Контакт с нас:";
 }
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
 <h3>@ViewData["Title"]</h3>
 <hr />
 
-<form method="post" asp-action="SendFromGmail">
+<form id="contactForm" method="post" asp-action="SendFromGmail">
     <div class="form-group">
         <label asp-for="Subject"></label>
         <input asp-for="Subject" class="form-control" />
@@ -20,5 +22,18 @@
         <span asp-validation-for="Message" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Изпрати</button>
+    <button type="submit" 
+                   class="btn btn-primary g-recaptcha" 
+                   data-sitekey="6LdzYgoaAAAAAKME3EERU7Amf5qFVE_SF0uXFKTw" 
+                   data-callback='onSubmit' 
+                   data-action='submit'>
+    Изпрати</button>
 </form>
+
+@section Scripts{ 
+    <script>
+        function onSubmit(token) {
+            document.getElementById("contactForm").submit();
+        }
+    </script>
+}
