@@ -5,6 +5,7 @@
 
 # User-specific files
 Credential.cs
+secrets.json
 *.rsuser
 *.suo
 *.user

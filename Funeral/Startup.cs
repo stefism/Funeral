@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 namespace Funeral
 {
     public class Startup
@@ -47,6 +49,10 @@ namespace Funeral
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 }).AddRazorRuntimeCompilation();
 
+            //Email send confirmation via SendGrid.
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddRazorPages();
 
             //Anti forgery.
@@ -54,8 +60,9 @@ namespace Funeral
             {
                 opt.HeaderName = "X-CSRF-TOKEN";
             });
-
-            services.AddTransient<IEmailSender>(es => new SendGridEmailSender(Credential.ApiKey));
+          
+            //Confugure SendGrid to send message to any mail.
+            services.AddTransient<ISendGridEmailSender>(es => new SendGridEmailSender(Credential.ApiKey));          
 
             services.AddTransient<IFramesService, FramesService>();
             services.AddTransient<IFileService, FileService>();
@@ -78,9 +85,11 @@ namespace Funeral
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                //app.UseExceptionHandler("/Home/Error");
+                //// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();

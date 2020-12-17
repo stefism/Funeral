@@ -1,0 +1,29 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Потвърждение на акаунта";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p>
+            В момента, за Ваше улеснение не изпращаме потвърдителни мейли.
+            @*This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.*@
+            Нормално щяхте да получите мейл: <a id="confirm-link" href="@Model.EmailConfirmationUrl"><b>МОЛЯ, КЛИКНЕТЕ ТУК, за да потвърдите Вашата регистрация.</b></a>
+        </p>
+    }
+    else
+    {
+        <p>
+            Мейл за потвърждение на акаунта е изпратен до Вас. В него има линк, който трябва да цъкнете за да потвърдите регистрацията си. Моля проверете Вашата поща. Ще можете да се логнете в сайта, след като потвърдите мейла си.
+        </p>
+        <p>
+            Ако не получите скоро потвърдителен мейл, моля проверете в папка "спам" или ако ползвате Gmail поща, проверете дали пощата не е пристигнала в секция "Социални" или "Рекламни съобщения."
+        </p>
+        <p>
+            Ако никъде не намирате потвърдителен мейл, моля да се свържете с нас, като ни пишете на bgfuneral@gmail.com
+        </p>
+    }
+}

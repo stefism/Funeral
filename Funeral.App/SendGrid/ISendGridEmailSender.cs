@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface IEmailSender
+    public interface ISendGridEmailSender
     {
         Task SendEmailAsync(
             string from,

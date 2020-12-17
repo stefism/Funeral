@@ -8,7 +8,7 @@ using SendGrid.Helpers.Mail;
 
 namespace Funeral.App.SendGrid
 {  
-    public class SendGridEmailSender : IEmailSender
+    public class SendGridEmailSender : ISendGridEmailSender
     {
         private readonly SendGridClient client;
 
