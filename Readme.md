@@ -23,4 +23,4 @@ The **Funeral Website** is prevent from security vulnerabilities like SQL Inject
 - Google reCaptcha
 
 ## :wrench: DB Diagram
-![](https://i.ibb.co/mCHh527/funeral-Db2.jpg)
+![](https://i.ibb.co/YWVDssH/funeral-Db.jpg)
