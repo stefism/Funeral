@@ -1,8 +1,10 @@
-﻿namespace Funeral.App.ViewModels
+﻿using System.Collections.Generic;
+
+namespace Funeral.App.ViewModels
 {
     public class CurrentObituaryViewModel
     {
-        public string Id { get; set; }
+        public string ObituaryId { get; set; }
 
         public string Background { get; set; }
 
@@ -23,5 +25,7 @@
         public string Panahida { get; set; }
 
         public string FromWhere { get; set; }
+
+        public IEnumerable<UserPictureViewModel> UserPictures { get; set; }
     }
 }

@@ -29,12 +29,21 @@ namespace Funeral.App.Services
             await db.SaveChangesAsync();
         }
 
+        public async Task ChangeUserPictureAsync(string obituaryId, string pictureId)
+        {
+            var obituary = db.Obituaries.FirstOrDefault(x => x.Id == obituaryId);
+            var picture = db.Pictures.FirstOrDefault(x => x.Id == pictureId);
+
+            obituary.Picture = picture;
+            await db.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<CurrentObituaryViewModel>> AllUserObituarysAsync(string userId)
         {
             var all = await db.Obituaries.Where(o => o.UserId == userId)
                 .Select(o => new CurrentObituaryViewModel
                 {
-                    Id = o.Id,
+                    ObituaryId = o.Id,
                     Background = o.Frame.FilePath,
                     Cross = o.Cross.FilePath,
                     CrossText = o.CrossTexts.Text,
@@ -55,7 +64,7 @@ namespace Funeral.App.Services
             var current = await db.Obituaries.Where(o => o.Id == id)
                 .Select(o => new CurrentObituaryViewModel
                 {
-                    Id = o.Id,
+                    ObituaryId = o.Id,
                     Background = o.Frame.FilePath,
                     Cross = o.Cross.FilePath,
                     CrossText = o.CrossTexts.Text,

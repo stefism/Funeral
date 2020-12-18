@@ -9,18 +9,28 @@ namespace Funeral.Web.Controllers
     public class ObituaryController : Controller
     {
         private readonly IObituaryService obituaryService;
+        private readonly IUserPictureService userPictureService;
 
-        public ObituaryController(IObituaryService obituaryService)
+        public ObituaryController(IObituaryService obituaryService, IUserPictureService pictureService)
         {
             this.obituaryService = obituaryService;
+            this.userPictureService = pictureService;
         }
 
         [Authorize]
         public async Task<IActionResult> Current(string id)
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var viewModel = await obituaryService.GetCurrentAsync(id);
+            var userPictures = userPictureService.AllUserPictures(userId);
+            viewModel.UserPictures = userPictures;
 
             return View(viewModel);
+        }
+
+        public IActionResult UserPictureGalleryPartial()
+        {
+            return View();
         }
 
         [Authorize]
@@ -31,6 +41,14 @@ namespace Funeral.Web.Controllers
             var model = await obituaryService.AllUserObituarysAsync(userId);
 
             return View(model);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ChangeUserPicture(string obituaryId, string pictureId)
+        {
+            await obituaryService.ChangeUserPictureAsync(obituaryId, pictureId);
+
+            return RedirectToAction(nameof(Current), new { id = obituaryId});
         }
 
         [Authorize]
