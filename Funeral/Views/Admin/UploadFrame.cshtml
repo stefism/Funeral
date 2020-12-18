@@ -5,7 +5,11 @@
 
 <link rel="stylesheet" href="~/css/Upload.css">
 
-<h1>Качване на нова рамка</h1>
+<div class="row">
+    <h1 class="mr-5">Качване на нова рамка</h1>
+    <a class="btn btn-info text-md-center mr-3" asp-controller="Admin" asp-action="UploadText">Качване на текст</a>
+    <a class="btn btn-success text-md-center" asp-controller="Admin" asp-action="UploadCross">Качване на кръст</a>
+</div>
 <h4>Можете да качвате само файлове с разширение .jpg, .png и .gif.</h4>
 <hr />
 

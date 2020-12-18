@@ -31,9 +31,22 @@
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
+                            //Droppdown
+                            <div class="dropdown show">
+                                <a class=" dropdown-toggle nav-item nav-link text-dark" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-poll-h"></i> Управление
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="MakeIt" asp-action="MakeIt">Направи си некролог</a>
+                                    <a class="dropdown-item" a asp-controller="UserPictures" asp-action="AllUserPictures">Вашите снимки</a>
+                                    <a class="dropdown-item" asp-controller="Obituary" asp-action="AllUserObituary">Вашите некролози</a>
+                                </div>
+                            </div>
+                            //----
+                            @*<li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MakeIt" asp-action="MakeIt"><i class="fas fa-poll-h"></i> Направи си</a>
-                            </li>
+                            </li>*@
                         }
                     </ul>
                 </div>

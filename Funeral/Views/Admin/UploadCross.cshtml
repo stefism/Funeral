@@ -3,29 +3,34 @@
     ViewData["Title"] = "Качване на кръст";
 }
 
-    <link rel="stylesheet" href="~/css/Upload.css">
+<link rel="stylesheet" href="~/css/Upload.css">
 
-    <h1>Качване на нов кръст</h1>
-    <h4>Можете да качвате само файлове с разширение .jpg, .png и .gif.</h4>
+<div class="row">
+    <h1 class="mr-5">Качване на нов кръст</h1>
+    <a class="btn btn-info text-md-center mr-3" asp-controller="Admin" asp-action="UploadText">Качване на текст</a>
+    <a class="btn btn-success text-md-center" asp-controller="Admin" asp-action="UploadFrame">Качване на рамка</a>
+</div>
+
+<h4>Можете да качвате само файлове с разширение .jpg, .png и .gif.</h4>
+<hr />
+
+<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="UploadCross">
+    <input id="inputBtn" type="file" name="imgFile" />
+    <input id="uploadBtn" type="submit" value="Качи файл." />
     <hr />
 
-    <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="UploadCross">
-        <input  id="inputBtn" type="file" name="imgFile" />
-        <input  id="uploadBtn" type="submit" value="Качи файл." />
-        <hr />
+    <h4>@Model.UploadMessage</h4>
+</form>
+<hr />
+<h2>Всички кръстове:</h2>
+<section id="all-frames">
 
-        <h4>@Model.UploadMessage</h4>
-    </form>
-    <hr />
-    <h2>Всички кръстове:</h2>
-    <section id="all-frames">
+    @foreach (var cross in Model.AllCrosses)
+    {
+        <img class="frame" width="150px" src="@cross.FilePath" alt="Alternate Text" />
+    }
 
-        @foreach (var cross in Model.AllCrosses)
-        {
-            <img class="frame" width="150px" src="@cross.FilePath" alt="Alternate Text" />
-        }
-
-    </section>
+</section>
 
 
 

@@ -15,8 +15,6 @@
             <li><a asp-controller="MakeIt" asp-action="ChangeToFrames">Рамки</a></li>
             <li><a asp-controller="MakeIt" asp-action="ChangeToTexts">Текстове</a></li>
             <li><a asp-controller="MakeIt" asp-action="ChangeToCrosses">Кръстове</a></li>
-            <li><a asp-controller="Obituary" asp-action="AllUserObituary">Вашите некролози</a></li>
-            <li><a asp-controller="UserPictures" asp-action="AllUserPictures">Вашите снимки</a></li>
             @if (User.IsInRole("Admin"))
             {
                 <div class="dropdown">
