@@ -1,46 +1,52 @@
 ﻿using Funeral.App.Data;
+using Funeral.App.Repositories;
 using Funeral.App.ViewModels;
 using Funeral.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Funeral.App.Services
 {
     public class TextsService : ITextsService
     {
-        private readonly ApplicationDbContext db;
+        private readonly IEFRepository<TextTemplate> textRepository;
 
-        public TextsService(ApplicationDbContext db)
+        public TextsService(IEFRepository<TextTemplate> textRepository)
         {
-            this.db = db;
+            this.textRepository = textRepository;
         }
-
-        public void AddTextToDb(string textToAdd)
+        //TODO: ImplementAsync
+        public async Task AddTextToDbAsync(string textToAdd)
         {
             var text = new TextTemplate
             {
                 Text = textToAdd
             };
 
-            db.TextTemplates.Add(text);
-            db.SaveChanges();
+            await textRepository.AddAsync(text);
+            await textRepository.SaveChangesAsync();          
         }
 
         public string GetTextById(string textId)
         {
-            return db.TextTemplates.Where(t => t.Id == textId).Select(t => t.Text).FirstOrDefault();
+
+            return textRepository.All()
+                .Where(t => t.Id == textId)
+                .Select(t => t.Text).FirstOrDefault();                                
         }
 
         public string ReturnFirtsText()
         {
-            return db.TextTemplates.Select(x => x.Text).FirstOrDefault();
+            return textRepository.All().Select(x => x.Text).FirstOrDefault();           
         }
 
         public ICollection<AllTextsViewModel> ShowAllTexts()
         {
-            var texts = db.TextTemplates.Select(t => new AllTextsViewModel
+            var texts = textRepository.All()
+                .Select(t => new AllTextsViewModel
             {
                 TextId = t.Id,
                 TextTemplate = t.Text

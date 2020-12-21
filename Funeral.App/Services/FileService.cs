@@ -1,23 +1,31 @@
 ﻿using Funeral.App.Data;
+using Funeral.App.Repositories;
 using Funeral.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Funeral.App.Services
 {
     public class FileService : IFileService
     {
-        private readonly IWebHostEnvironment webHost;
-        private readonly ApplicationDbContext db;
+        private readonly IWebHostEnvironment webHost;        
+        private readonly IEFRepository<Picture> picturesRepository;
+        private readonly IEFRepository<Cross> crossesRepository;
+        private readonly IEFRepository<Frame> framesRepository;
 
-        public FileService(IWebHostEnvironment webHost, ApplicationDbContext db)
+        public FileService(
+            IWebHostEnvironment webHost,
+            IEFRepository<Picture> picturesRepository,
+            IEFRepository<Cross> crossesRepository,
+            IEFRepository<Frame> framesRepository)
         {
             this.webHost = webHost;
-            this.db = db;
+            this.picturesRepository = picturesRepository;
+            this.crossesRepository = crossesRepository;
+            this.framesRepository = framesRepository;
         }
 
         public void DeleteFrameFile(string framePath)
@@ -29,11 +37,12 @@ namespace Funeral.App.Services
             {
                 File.Delete(filePath);
             }
+            //TODO: Implement if file not exist.
         }
 
         public async Task DeleteUserPictureFileAsync(string pictureId)
         {
-            var userPicture = db.Pictures
+            var userPicture = picturesRepository.All()
                 .Where(p => p.Id == pictureId).FirstOrDefault();
 
             var userPicturePath = userPicture.FilePath;
@@ -44,12 +53,12 @@ namespace Funeral.App.Services
                 File.Delete(filePath);
             }
 
-            db.Pictures.Remove(userPicture);
-            await db.SaveChangesAsync();
+            picturesRepository.Delete(userPicture);
+            await picturesRepository.SaveChangesAsync();           
         }
 
         public async Task SaveElementToDbAsync(string elementType, string input, string userId = null)
-        {    
+        {
             if (elementType == "Cross")
             {
                 var cross = new Cross
@@ -57,8 +66,8 @@ namespace Funeral.App.Services
                     FilePath = input,
                 };
 
-                await db.Crosses.AddAsync(cross);
-                await db.SaveChangesAsync();
+                await crossesRepository.AddAsync(cross);
+                await crossesRepository.SaveChangesAsync();                
             }
 
             else if (elementType == "Frame")
@@ -68,8 +77,8 @@ namespace Funeral.App.Services
                     FilePath = input,
                 };
 
-                await db.Frames.AddAsync(frame);
-                await db.SaveChangesAsync();
+                await framesRepository.AddAsync(frame);
+                await framesRepository.SaveChangesAsync();                
             }
 
             else if (elementType == "Picture")
@@ -80,8 +89,8 @@ namespace Funeral.App.Services
                     UserId = userId,
                 };
 
-                await db.Pictures.AddAsync(picture);
-                await db.SaveChangesAsync();
+                await picturesRepository.AddAsync(picture);
+                await picturesRepository.SaveChangesAsync();               
             }
         }
 
@@ -93,6 +102,7 @@ namespace Funeral.App.Services
             using (var uploadImage = new FileStream(imagePath, FileMode.Create))
             {
                 await imgFile.CopyToAsync(uploadImage);
+                //TODO: Implement if file exist.
             }
         }
     }

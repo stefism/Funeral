@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Funeral.App.Repositories;
 
 namespace Funeral
 {
@@ -60,6 +61,10 @@ namespace Funeral
             {
                 opt.HeaderName = "X-CSRF-TOKEN";
             });
+
+            //Repository
+            services.AddSingleton(Configuration);
+            services.AddScoped(typeof(IEFRepository<>), typeof(EFRepository<>));
           
             //Confugure SendGrid to send message to any mail.
             services.AddTransient<ISendGridEmailSender>(es => new SendGridEmailSender(Credential.ApiKey));          

@@ -71,9 +71,9 @@ namespace Funeral.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadText(string funeralText)
+        public async Task<IActionResult> UploadText(string funeralText)
         {
-            textService.AddTextToDb(funeralText);
+            await textService.AddTextToDbAsync(funeralText);
 
             return RedirectToAction("UploadText");
         }

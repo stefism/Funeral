@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Funeral.App.Services
 {
@@ -11,7 +12,7 @@ namespace Funeral.App.Services
 
         string GetTextById(string textId);
 
-        void AddTextToDb(string textToAdd);
+        Task AddTextToDbAsync(string textToAdd);
 
         ICollection<AllTextsViewModel> ShowAllTexts();
     }

@@ -1,6 +1,7 @@
-﻿using Funeral.App.ViewModels;
+﻿using Funeral.App.Data;
+using Funeral.App.Repositories;
+using Funeral.App.ViewModels;
 using Funeral.Data;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,21 +10,27 @@ namespace Funeral.App.Services
 {
     public class UserPictureService : IUserPictureService
     {
-        private readonly ApplicationDbContext db;
+        private readonly IEFRepository<Picture> picturesRepository;
+        private readonly IEFRepository<Obituary> obituarysRepository;
 
-        public UserPictureService(ApplicationDbContext db)
+        public UserPictureService(
+            IEFRepository<Picture> picturesRepository,
+             IEFRepository<Obituary> obituarysRepository)
         {
-            this.db = db;
+            this.picturesRepository = picturesRepository;
+            this.obituarysRepository = obituarysRepository;
         }
 
         public int GetUserPictureCount(string userId)
         {
-            return db.Pictures.Where(p => p.UserId == userId).Count();
+            return picturesRepository.All()
+                .Where(p => p.UserId == userId).Count();
         }
 
         public IEnumerable<UserPictureViewModel> AllUserPictures(string userId)
         {
-            return db.Pictures.Where(p => p.UserId == userId)
+            return picturesRepository.All()
+                .Where(p => p.UserId == userId)
                 .Select(p => new UserPictureViewModel
                 {
                     PictureId = p.Id,
@@ -33,7 +40,8 @@ namespace Funeral.App.Services
 
         public UserPictureViewModel CurrentUserPicure(string pictureId)
         {
-            return db.Pictures.Where(p => p.Id == pictureId)
+            return picturesRepository.All()
+                .Where(p => p.Id == pictureId)
                 .Select(p => new UserPictureViewModel
                 {
                     PictureId = p.Id,
@@ -43,8 +51,9 @@ namespace Funeral.App.Services
 
         public async Task RemovePictureIdFromUserObityarysAsync(string pictureId)
         {
-            var userObituarys = db.Obituaries.Where(o => o.PictureId == pictureId);
-
+            var userObituarys = obituarysRepository.All()
+                .Where(o => o.PictureId == pictureId);
+          
             if (userObituarys != null)
             {
                 foreach (var obituary in userObituarys)
@@ -53,7 +62,7 @@ namespace Funeral.App.Services
                 }
             }
 
-            await db.SaveChangesAsync();
+            await obituarysRepository.SaveChangesAsync();            
         }
     }
 }
