@@ -24,3 +24,9 @@ The **Funeral Website** is prevent from security vulnerabilities like SQL Inject
 
 ## :wrench: DB Diagram
 ![](https://i.ibb.co/YWVDssH/funeral-Db.jpg)
+
+## :man_student: License
+Copyright (c) 2020 Stefan Markov
+
+This software is the property of the author mentioned above. You may download and view the software for informational or training purposes only.
+It is forbidden to use the software or parts of it for commercial purposes without the express permission of the author.

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>-</UserSecretsId>
+    <UserSecretsId>aspnet-Funeral--</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <ApplicationInsightsResourceId>-</ApplicationInsightsResourceId>
   </PropertyGroup>
