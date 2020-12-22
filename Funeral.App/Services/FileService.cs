@@ -28,17 +28,17 @@ namespace Funeral.App.Services
             this.framesRepository = framesRepository;
         }
 
-        public void DeleteFrameFile(string framePath)
+        public void DeleteFile(string filePath)
         {
 
-            string filePath = "wwwroot" + framePath;
+            string path = "wwwroot" + filePath;
 
-            if (filePath != null)
+            if (path != null)
             {
-                File.Delete(filePath);
+                File.Delete(path);
             }
             //TODO: Implement if file not exist.
-        }
+        }      
 
         public async Task DeleteUserPictureFileAsync(string pictureId)
         {

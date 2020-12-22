@@ -22,12 +22,17 @@
 </form>
 <hr />
 <h2>Всички рамки:</h2>
+<p>Можете да премахнете само рамка, която в момента не се използва от потребител, като част от негов некролог. В противен случай, некролога на потребителя който я ползва, ще остане без рамка. Ако некролога е с неприемливо съдържание, можете като администратор първо да премахнете некролога, след което и всички свързани с него елементи.</p>
 
 <section id="all-frames">
     @foreach (var frame in Model.AllFrames)
     {
         <img class="frame" width="150px" src="@frame.FilePath" alt="Alternate Text" />
-        <a asp-controller="Admin" asp-action="DeleteFrame" asp-route-frameId="@frame.FrameId"><i class="deletable fas fa-trash-alt"></i></a>
+        
+        @if (!frame.IsUsed)
+        {
+            <a asp-controller="Admin" asp-action="DeleteFrame" asp-route-frameId="@frame.FrameId"><i class="deletable fas fa-trash-alt"></i></a>
+        }
     }
 </section>
 

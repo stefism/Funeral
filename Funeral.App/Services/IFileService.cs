@@ -7,7 +7,7 @@ namespace Funeral.App.Services
     {
         public Task UploadFile(IFormFile imgFile, string targetDirectory);
 
-        public void DeleteFrameFile(string frameId);
+        public void DeleteFile(string frameId);
 
         public Task DeleteUserPictureFileAsync(string pictureId);
 

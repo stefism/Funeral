@@ -37,6 +37,6 @@ namespace Funeral.App.ViewModels
 
         public ICollection<AllCrossesViewModel> AllCrosses { get; set; }
 
-        public ICollection<AllTextsViewModel> AllTexts { get; set; }
+        public ICollection<TextTemplateViewModel> AllTexts { get; set; }
     }
 }

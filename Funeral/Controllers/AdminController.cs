@@ -15,7 +15,11 @@ namespace Funeral.Web.Controllers
         private readonly ICrossesService crossesService;
         private readonly ITextsService textService;
 
-        public AdminController(IFileService fileService, IFramesService framesService, ICrossesService crossesService, ITextsService textService)
+        public AdminController(
+            IFileService fileService, 
+            IFramesService framesService, 
+            ICrossesService crossesService, 
+            ITextsService textService)
         {
             this.fileService = fileService;
             this.framesService = framesService;
@@ -48,6 +52,43 @@ namespace Funeral.Web.Controllers
             return View(model);
         }
 
+        public IActionResult DeleteTextTemplate(TextTemplateViewModel input)
+        {
+            var viewModel = new TextTemplateViewModel
+            {
+                TextId = input.TextId,
+                TextTemplate = input.TextTemplate,
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> DoDeleteTextTemplate(string textTemplateId)
+        {
+            await textService.DeleteTextTemplateAsync(textTemplateId);
+
+            return RedirectToAction(nameof(UploadText));
+        }
+
+        public IActionResult EditTextTemplate(TextTemplateViewModel input)
+        {
+            var viewModel = new TextTemplateViewModel
+            {
+                TextId = input.TextId,
+                TextTemplate = input.TextTemplate,
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DoEditTextTemplate(string textId, string editedText)
+        {
+            await textService.EditTextTemplateAsync(textId, editedText);
+
+            return RedirectToAction(nameof(UploadText));
+        }
+
         public IActionResult DeleteFrame(string frameId)
         {
             string framePath = framesService.GetFramePathById(frameId);
@@ -65,7 +106,7 @@ namespace Funeral.Web.Controllers
         {
             string framePath = framesService.GetFramePathById(frameId);
 
-            fileService.DeleteFrameFile(framePath);
+            fileService.DeleteFile(framePath);
 
             return RedirectToAction("UploadFrame");
         }

@@ -1,4 +1,4 @@
-﻿@model ICollection<Funeral.App.ViewModels.AllTextsViewModel>
+﻿@model ICollection<Funeral.App.ViewModels.TextTemplateViewModel>
 @{
     ViewData["Title"] = "Качване на текст";
 }
@@ -16,11 +16,43 @@
 </form>
 <hr />
 <h4>Всички текстове:</h4>
-<section>
-    @foreach (var text in Model)
-    {
-        <p>@text.TextTemplate</p>
-        <hr />
-    }
-</section>
+Можете да премахвате и редактирате само текстове, които в момента не се използват от потребител, като част от негов некролог. В противен случай, некролога на потребителя който ги ползва, ще остане без текст или текста му ще бъде променен. Ако некролога е с неприемливо съдържание, можете като администратор първо да премахнете некролога, след което и всички свързани с него елементи.
 
+<section>
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Текст</th>
+            <th>Премахване</th>
+            <th>Редактиране</th>
+        </tr>
+
+        @foreach (var text in Model)
+        {
+            <tr>
+                <td>
+                    @text.TextTemplate
+                </td>
+
+                @if (!text.IsTextUsed)
+                {
+            <td>
+                <a asp-controller="Admin" asp-action="DeleteTextTemplate" asp-route-textId="@text.TextId" asp-route-textTemplate="@text.TextTemplate" class="btn btn-sm btn-danger">Премахване</a>
+            </td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditTextTemplate" asp-route-textId="@text.TextId" asp-route-textTemplate="@text.TextTemplate" class="btn btn-sm btn-warning">Редактирай</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                }
+            </tr>
+
+            
+        }
+    </table>
+</section>

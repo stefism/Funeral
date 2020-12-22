@@ -1,0 +1,13 @@
+﻿@model Funeral.App.ViewModels.TextTemplateViewModel
+@{
+    ViewData["Title"] = "Редактиране на текст";
+}
+
+<h2 name="">Редакция на текст от шаблона:</h2>
+<hr />
+<form asp-controller="Admin" asp-action="DoEditTextTemplate" method="post">
+<textarea name="editedText" asp-for="TextTemplate" class="form-control"></textarea>
+<input name="textId" type="hidden" asp-for="TextId" />
+    <hr />
+    <button type="submit" class="btn btn-warning btn-sm">Редактирай</button>
+</form>

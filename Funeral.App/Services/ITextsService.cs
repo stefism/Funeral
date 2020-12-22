@@ -12,8 +12,12 @@ namespace Funeral.App.Services
 
         string GetTextById(string textId);
 
+        Task DeleteTextTemplateAsync(string textTemplateId);
+
+        Task EditTextTemplateAsync(string textId, string editedText);
+
         Task AddTextToDbAsync(string textToAdd);
 
-        ICollection<AllTextsViewModel> ShowAllTexts();
+        ICollection<TextTemplateViewModel> ShowAllTexts();
     }
 }

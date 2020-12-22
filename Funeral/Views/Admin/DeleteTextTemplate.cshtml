@@ -1,0 +1,9 @@
+﻿@model Funeral.App.ViewModels.TextTemplateViewModel
+@{
+    ViewData["Title"] = "Премахване на текст";
+}
+
+<h2>Премахване на текст от шаблонните текстове:</h2>
+<hr />
+<h5 >Текстът "<span class="text-success">@Model.TextTemplate</span>" ще бъде окончателно премахнат.</h5>
+<h5>Моля, потвърдете премахването:         ><a asp-controller="Admin" asp-action="DoDeleteTextTemplate" asp-route-textTemplateId="@Model.TextId" class="btn btn-danger btn-sm">Премахни</a><</h5>
