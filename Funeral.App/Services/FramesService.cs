@@ -26,10 +26,10 @@ namespace Funeral.App.Services
                 .Select(f => f.FilePath).FirstOrDefault();
         }
 
-        public ICollection<AllFramesViewModel> ShowAllFrames()
+        public ICollection<FrameViewModel> ShowAllFrames()
         {
             var frames = framesRepository.All()
-                .Select(f => new AllFramesViewModel
+                .Select(f => new FrameViewModel
             {
                 FrameId = f.Id,
                 FilePath = f.FilePath,

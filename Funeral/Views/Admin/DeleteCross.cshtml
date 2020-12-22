@@ -1,0 +1,14 @@
+﻿@model Funeral.App.ViewModels.CrossViewModel
+@{
+    ViewData["Title"] = "Премахване на кръст";
+}
+
+<h1>Внимание! Показания по-долу кръст ще бъде премахнат.</h1>
+<h4>Моля потвърдете премахването.</h4>
+<form method="post">
+    <input class="invisible" name="crossId" value="@Model.CrossId" />
+    <button type="submit" class="btn btn-danger" asp-controller="Admin" asp-action="DoDeleteCross">Премахни</button>
+</form>
+<hr />
+
+<img class="frame" width="200px" src="@Model.FilePath" alt="Alternate Text" />

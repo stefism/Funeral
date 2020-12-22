@@ -33,9 +33,9 @@ namespace Funeral.App.ViewModels
 
         public Elements Elements { get; set; }
 
-        public ICollection<AllFramesViewModel> AllFrames { get; set; }
+        public ICollection<FrameViewModel> AllFrames { get; set; }
 
-        public ICollection<AllCrossesViewModel> AllCrosses { get; set; }
+        public ICollection<CrossViewModel> AllCrosses { get; set; }
 
         public ICollection<TextTemplateViewModel> AllTexts { get; set; }
     }

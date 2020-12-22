@@ -1,0 +1,50 @@
+﻿#mainMenu {
+    display: block;
+}
+
+#inputBtn {
+    color: white;
+    background-color: deepskyblue;
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 20px;
+}
+
+#uploadBtn {
+    color: white;
+    background-color: orangered;
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    
+}
+
+#all-frames {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.frame {
+    margin: 5px;
+    padding: 8px; 
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px gray;
+    justify-content: center;
+    position: relative;
+}
+
+.deletable {
+    color: #d7d4d4;
+    position: relative;
+    right: 40px;
+    bottom: -80px;
+    z-index: 1;
+    font-size: 22px;
+}
+
+.deletable:hover {
+    color: red;
+    cursor: pointer;
+}

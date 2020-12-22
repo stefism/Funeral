@@ -8,7 +8,7 @@ namespace Funeral.App.Services
 {
     public interface IFramesService
     {
-        ICollection<AllFramesViewModel> ShowAllFrames();
+        ICollection<FrameViewModel> ShowAllFrames();
 
         string GetFramePathById(string frameId);
         

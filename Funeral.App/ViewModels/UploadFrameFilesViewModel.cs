@@ -8,6 +8,6 @@ namespace Funeral.App.ViewModels
     {
         public string UploadMessage { get; set; }
 
-        public ICollection<AllFramesViewModel> AllFrames { get; set; }
+        public ICollection<FrameViewModel> AllFrames { get; set; }
     }
 }

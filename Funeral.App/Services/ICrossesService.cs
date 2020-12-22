@@ -10,6 +10,6 @@ namespace Funeral.App.Services
     {
         Task<string> GetCrossPathByIdAsync(string crossId);
 
-        ICollection<AllCrossesViewModel> ShowAllCrosses();
+        ICollection<CrossViewModel> ShowAllCrosses();
     }
 }

@@ -3,7 +3,7 @@
     ViewData["Title"] = "Качване на кръст";
 }
 
-<link rel="stylesheet" href="~/css/Upload.css">
+<link href="~/css/UploadCross.css" rel="stylesheet" />
 
 <div class="row">
     <h1 class="mr-5">Качване на нов кръст</h1>
@@ -23,11 +23,17 @@
 </form>
 <hr />
 <h2>Всички кръстове:</h2>
+<p>Можете да премахнете само кръст, който в момента не се използва от потребител, като част от негов некролог. В противен случай, некролога на потребителя който го ползва, ще остане без кръст. Ако некролога е с неприемливо съдържание, можете като администратор първо да премахнете некролога, след което и всички свързани с него елементи.</p>
 <section id="all-frames">
 
     @foreach (var cross in Model.AllCrosses)
     {
         <img class="frame" width="150px" src="@cross.FilePath" alt="Alternate Text" />
+        
+        @if (!cross.IsUsed)
+        {
+            <a asp-controller="Admin" asp-action="DeleteCross" asp-route-crossId="@cross.CrossId"><i class="deletable fas fa-trash-alt"></i></a>
+        }
     }
 
 </section>

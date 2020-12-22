@@ -19,30 +19,30 @@ namespace Funeral.App.Repositories
 
         protected DbSet<TEntity> DbSet { get; set; }
 
-        public virtual IQueryable<TEntity> All() => this.DbSet;
+        public virtual IQueryable<TEntity> All() => DbSet;
 
-        public virtual IQueryable<TEntity> AllAsNoTracking() => this.DbSet.AsNoTracking();
+        public virtual IQueryable<TEntity> AllAsNoTracking() => DbSet.AsNoTracking();
 
-        public virtual Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity).AsTask();
+        public virtual Task AddAsync(TEntity entity) => DbSet.AddAsync(entity).AsTask();
 
         public virtual void Update(TEntity entity)
         {
-            var entry = this.DbContext.Entry(entity);
+            var entry = DbContext.Entry(entity);
             if (entry.State == EntityState.Detached)
             {
-                this.DbSet.Attach(entity);
+                DbSet.Attach(entity);
             }
 
             entry.State = EntityState.Modified;
         }
 
-        public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
+        public virtual void Delete(TEntity entity) => DbSet.Remove(entity);
 
-        public Task<int> SaveChangesAsync() => this.DbContext.SaveChangesAsync();
+        public Task<int> SaveChangesAsync() => DbContext.SaveChangesAsync();
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -50,7 +50,7 @@ namespace Funeral.App.Repositories
         {
             if (disposing)
             {
-                this.DbContext?.Dispose();
+                DbContext?.Dispose();
             }
         }
     }

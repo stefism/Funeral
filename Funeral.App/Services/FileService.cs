@@ -57,6 +57,24 @@ namespace Funeral.App.Services
             await picturesRepository.SaveChangesAsync();           
         }
 
+        public async Task RemoveFrameFromDbAsync(string frameId)
+        {
+            var frame = framesRepository.All()
+                .Where(f => f.Id == frameId).FirstOrDefault();
+            
+            framesRepository.Delete(frame);
+            await framesRepository.SaveChangesAsync();
+        }
+
+        public async Task RemoveCrossFromDbAsync(string crossId)
+        {
+            var cross = crossesRepository.All()
+                .Where(c => c.Id == crossId).FirstOrDefault();
+
+            crossesRepository.Delete(cross);
+            await crossesRepository.SaveChangesAsync();
+        }
+
         public async Task SaveElementToDbAsync(string elementType, string input, string userId = null)
         {
             if (elementType == "Cross")

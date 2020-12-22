@@ -1,8 +1,8 @@
 ﻿namespace Funeral.App.ViewModels
 {
-    public class AllFramesViewModel
+    public class CrossViewModel
     {
-        public string FrameId { get; set; }
+        public string CrossId { get; set; }
 
         public string FilePath { get; set; }
 
