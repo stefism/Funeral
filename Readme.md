@@ -8,7 +8,8 @@ The **Funeral Website** is entirely in Bulgarian with a focus on Bulgarian users
 
 I used the built-in **.NET** system for identity, as almost all pages of the identity were scaffolded and modified. The site has an administration section and when a user with administrative rights logs in to the site he gets access to the administration options. The administrator has the ability to add, edit and remove visual elements from the obituary template. It also has the ability to see information about users of the site such as their e-mails, the number of obituaries ordered, as well as to check the content uploaded by the user.
 
-When writing the code I tried to follow the best practices for **Object Oriented design** and **high-quality code** for the Web application. I also tried to comply the **OOP principles** like data encapsulation, inheritance, abstraction and polymorphism and follow the principles of strong cohesion and loose coupling.
+When writing the code I tried to follow the best practices for **Object Oriented design** and **high-quality code** for the Web application. I also tried to comply the **OOP principles** like data encapsulation, inheritance, abstraction and polymorphism and follow the principles of strong cohesion and loose coupling. Also, as an additional layer of the application, I used **repository pattern** for better separation of responsibilities and easier testing of services.
+
 The **Funeral Website** is prevent from security vulnerabilities like SQL Injection, XSS, CSRF, parameter tampering, etc.
 
 ## :hammer: Built With
@@ -18,9 +19,11 @@ The **Funeral Website** is prevent from security vulnerabilities like SQL Inject
 - ASP.NET CORE view components
 - ASP.NET Core areas
 - MSSQL Server
+- [Fontawesome](https://fontawesome.com "Fontawesome")
 - SendGrid
 - Bootstrap
 - Google reCaptcha
+- [xUnit](https://xunit.net "xUnit") test library
 
 ## :wrench: DB Diagram
 ![](https://i.ibb.co/YWVDssH/funeral-Db.jpg)
