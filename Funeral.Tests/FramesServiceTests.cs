@@ -1,30 +1,29 @@
-using Funeral.App.Data;
+﻿using Funeral.App.Data;
 using Funeral.App.Repositories;
 using Funeral.App.Services;
 using MockQueryable.Moq;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Funeral.Tests
 {
-    public class CrossesServiceTests
+    public class FramesServiceTests
     {
-        List<Cross> CrossesList = new List<Cross>
+        List<Frame> FramesList = new List<Frame>
+        {
+            new Frame
             {
-                new Cross
-                {
-                    Id = "1",
-                    FilePath = "Path1",
-                },
-                new Cross
-                {
-                    Id = "2",
-                    FilePath = "Path2"
-                },
-            };
+                Id = "frame1Id",
+                FilePath = "framePath1"
+            },
+            new Frame
+            {
+                Id = "frame2Id",
+                FilePath = "framePath2"
+            },
+        };
 
         List<Obituary> ObituariesList = new List<Obituary>
         {
@@ -32,7 +31,7 @@ namespace Funeral.Tests
             {
                 Id = "ObituaryId1",
                 UserId = "UserId1",
-                FrameId = "FrameId1",
+                FrameId = "frame1Id",
                 TextTemplateId = "TextTemplateId1",
                 CustomTextId = " CustomTextId1",
                 CrossId = "1",
@@ -48,7 +47,7 @@ namespace Funeral.Tests
             {
                 Id = "ObituaryId2",
                 UserId = "UserId2",
-                FrameId = "FrameId2",
+                FrameId = "FrameId3",
                 TextTemplateId = "TextTemplateId2",
                 CustomTextId = " CustomTextId2",
                 CrossId = "3",
@@ -62,38 +61,37 @@ namespace Funeral.Tests
             }
         };
 
-        private Mock<IEFRepository<Cross>> crossRepo;
+        private Mock<IEFRepository<Frame>> framesRepo;
         private Mock<IEFRepository<Obituary>> obituaryRepo;
 
-        public CrossesServiceTests()
+        public FramesServiceTests()
         {
-            crossRepo = new Mock<IEFRepository<Cross>>();
+            framesRepo = new Mock<IEFRepository<Frame>>();
             obituaryRepo = new Mock<IEFRepository<Obituary>>();
 
-            var crossMock = CrossesList.AsQueryable().BuildMock();
-            crossRepo.Setup(method => method.All()).Returns(crossMock.Object);
+            var framesMock = FramesList.AsQueryable().BuildMock();
+            framesRepo.Setup(method => method.All()).Returns(framesMock.Object);
 
             var obituaryMock = ObituariesList.AsQueryable().BuildMock();
             obituaryRepo.Setup(method => method.All()).Returns(obituaryMock.Object);
         }
 
         [Fact]
-        public void TestShowAllCrossesMethodReturnsPropertyValue()
+        public void TestShowAllFramesMethod()
         {
-            var service = new CrossesService(crossRepo.Object, obituaryRepo.Object);
-            var crossesCount = service.ShowAllCrosses().Count();
+            var service = new FramesService(framesRepo.Object, obituaryRepo.Object);
+            var framesCount = service.ShowAllFrames().Count();
 
-            Assert.Equal(2, crossesCount);
+            Assert.Equal(2, framesCount);
         }
 
         [Fact]
-        public async Task TestGetCrossPathByIdAsyncMethod()
+        public void TestGetFramePathByIdMethod()
         {
+            var service = new FramesService(framesRepo.Object, obituaryRepo.Object);
+            var framePath = service.GetFramePathById("frame1Id");
 
-            var service = new CrossesService(crossRepo.Object, obituaryRepo.Object);
-            var crossPath = await service.GetCrossPathByIdAsync("2");
-
-            Assert.Equal("Path2", crossPath);
+            Assert.Equal("framePath1", framePath);
         }
     }
 }
