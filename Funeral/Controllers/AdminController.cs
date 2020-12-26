@@ -15,17 +15,27 @@ namespace Funeral.Web.Controllers
         private readonly IFramesService framesService;
         private readonly ICrossesService crossesService;
         private readonly ITextsService textService;
+        private readonly IUserService userService;
 
         public AdminController(
             IFileService fileService, 
             IFramesService framesService, 
             ICrossesService crossesService, 
-            ITextsService textService)
+            ITextsService textService,
+            IUserService userService)
         {
             this.fileService = fileService;
             this.framesService = framesService;
             this.crossesService = crossesService;
             this.textService = textService;
+            this.userService = userService;
+        }
+
+        public IActionResult AllUsersInfo()
+        {
+            var viewModel = userService.ShowUsersInfo();
+            
+            return View(viewModel);
         }
 
         public IActionResult UploadFrame()

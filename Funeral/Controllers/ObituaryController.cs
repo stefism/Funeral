@@ -43,6 +43,14 @@ namespace Funeral.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> AllUserObituaryAdmin(string id)
+        {            
+            var model = await obituaryService.AllUserObituarysAsync(id);
+
+            return View(model);
+        }
+
         [Authorize]
         public async Task<IActionResult> ChangeUserPicture(string obituaryId, string pictureId)
         {

@@ -38,6 +38,6 @@ namespace Funeral.Data
 
         public DbSet<TextTemplate> TextTemplates { get; set; }
 
-        public DbSet<UserObituary> UserObituaries { get; set; }
+        public DbSet<UserObituary> UserObituaries { get; set; }        
     }
 }

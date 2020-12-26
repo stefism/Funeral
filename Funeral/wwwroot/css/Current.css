@@ -29,9 +29,9 @@ body {
     margin: 0 auto;
 }
 
-#mainMenu {
+/*#mainMenu {
     display: block;
-}
+}*/
 
 #design {
     width: 220mm;
@@ -200,16 +200,6 @@ body {
     top: 1050px;
     left: 130px;
     z-index: 4;
-}
-
-.fas {
-    font-size: 20px;
-    color: rgba(40, 167, 69, 0.51);
-    padding: 7px;
-}
-
-.fas:hover {
-    color: palevioletred;
 }
 
 #items {

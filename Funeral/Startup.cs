@@ -76,6 +76,7 @@ namespace Funeral
             services.AddTransient<IObituaryService, ObituaryService>();
             services.AddTransient<IUserPictureService, UserPictureService>();
             services.AddTransient<IGmailService, MailFromGmailService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
