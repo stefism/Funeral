@@ -26,12 +26,7 @@ namespace Funeral.Web.Controllers
             viewModel.UserPictures = userPictures;
 
             return View(viewModel);
-        }
-
-        public IActionResult UserPictureGalleryPartial()
-        {
-            return View();
-        }
+        }     
 
         [Authorize]
         public async Task<IActionResult> AllUserObituary()
@@ -47,6 +42,7 @@ namespace Funeral.Web.Controllers
         public async Task<IActionResult> AllUserObituaryAdmin(string id)
         {            
             var model = await obituaryService.AllUserObituarysAsync(id);
+            TempData["UserName"] = User.Identity.Name;
 
             return View(model);
         }

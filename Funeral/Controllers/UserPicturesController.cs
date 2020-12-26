@@ -31,6 +31,15 @@ namespace Funeral.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles ="Admin")]
+        public IActionResult AllUserPicturesAdmin(string id)
+        {
+            var viewModel = userPictureService.AllUserPictures(id);
+            TempData["UserName"] = User.Identity.Name;
+            
+            return View(viewModel);
+        }
+
         public IActionResult DeleteUserPicture(string pictureId)
         {
             var viewModel = userPictureService.CurrentUserPicure(pictureId);

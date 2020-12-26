@@ -9,5 +9,7 @@
         public string Email { get; set; }
 
         public int ObituaryCount { get; set; }
+
+        public int PicturesCount { get; set; }
     }
 }

@@ -1,0 +1,21 @@
+﻿@using Funeral.App.ViewModels
+@model IEnumerable<UserPictureViewModel>
+
+@{
+    ViewData["Title"] = "Всички снимки на потребителя";
+}
+
+<link href="~/css/AllUserPicture.css" rel="stylesheet" />
+
+<h3>Всички снимки на потребител @TempData["UserName"]</h3>
+<hr />
+
+<div class="row">
+    @foreach (var picture in Model)
+    {
+        <div class="media col-md-4">
+            <img class="mb-3" width="200px" height="250px" src="@picture.PictureFilePath" alt="Alternate Text" />
+            <a asp-controller="UserPictures" asp-action="DeleteUserPicture" asp-route-pictureId="@picture.PictureId"><i class="deletable fas fa-trash-alt"></i></a>
+        </div>
+    }
+</div>

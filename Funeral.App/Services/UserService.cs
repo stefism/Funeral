@@ -22,6 +22,7 @@ namespace Funeral.App.Services
                 Username = u.UserName,
                 Email = u.Email,
                 ObituaryCount = db.UserObituaries.Where(uo => uo.UserId == u.Id).Count(),
+                PicturesCount = db.Pictures.Where(p => p.UserId == u.Id).Count(),
             }).ToList();
         }
     }
