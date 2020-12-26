@@ -1,7 +1,6 @@
 ﻿using Funeral.App.Data;
 using Funeral.App.Repositories;
 using Funeral.App.ViewModels;
-using Funeral.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,7 +52,7 @@ namespace Funeral.App.Services
         {
             var userObituarys = obituarysRepository.All()
                 .Where(o => o.PictureId == pictureId);
-          
+
             if (userObituarys != null)
             {
                 foreach (var obituary in userObituarys)
@@ -62,7 +61,7 @@ namespace Funeral.App.Services
                 }
             }
 
-            await obituarysRepository.SaveChangesAsync();            
+            await obituarysRepository.SaveChangesAsync();
         }
     }
 }

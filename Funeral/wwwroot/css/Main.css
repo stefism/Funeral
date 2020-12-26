@@ -20,14 +20,6 @@
     box-shadow: inset 0 0 15px rgb(119, 41, 5);
 }
 
-/*::-webkit-resizer {*/
-/*border: 2px solid black;*/
-/*background: gray;*/
-/*box-shadow: 2px 2px 2px 2px gray;*/
-/*outline: 3px solid yellow;*/
-/*background-image: url(/resize2.png);
-}*/
-
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@500&display=swap');
 
 body {
@@ -37,9 +29,9 @@ body {
     margin: 0 auto;
 }
 
-#mainMenu {
+/*#mainMenu {
     display: block;
-}
+}*/
 
 img {
     pointer-events: none;
@@ -242,13 +234,13 @@ aside {
     z-index: 4;
 }
 
-.fas {
+.fontIcons {
     font-size: 20px;
     color: rgba(40, 167, 69, 0.51);
     padding: 7px;
 }
 
-    .fas:hover {
+    .fontIcons:hover {
         color: palevioletred;
     }
 

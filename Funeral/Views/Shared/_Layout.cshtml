@@ -38,15 +38,18 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="MakeIt" asp-action="MakeIt">Направи си некролог</a>
-                                    <a class="dropdown-item" a asp-controller="UserPictures" asp-action="AllUserPictures">Вашите снимки</a>
-                                    <a class="dropdown-item" asp-controller="Obituary" asp-action="AllUserObituary">Вашите некролози</a>
+                                    <a class="dropdown-item" asp-controller="MakeIt" asp-action="MakeIt"><i class="fas fa-portrait"></i> Направи си некролог</a>
+                                    <a class="dropdown-item" a asp-controller="UserPictures" asp-action="AllUserPictures"><i class="fas fa-grip-horizontal"></i> Вашите снимки</a>
+                                    <a class="dropdown-item" asp-controller="Obituary" asp-action="AllUserObituary"><i class="far fa-address-book"></i> Вашите некролози</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <hr />
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="UploadFrame"><i class="text-danger fas fa-user-cog"></i> Качване на рамка</a>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="UploadCross"><i class="text-danger fas fa-user-cog"></i> Качване на кръст</a>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="UploadText"><i class="text-danger fas fa-user-cog"></i> Качване на текст</a>
+                                    }
                                 </div>
-                            </div>
-                            //----
-                            @*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MakeIt" asp-action="MakeIt"><i class="fas fa-poll-h"></i> Направи си</a>
-                            </li>*@
+                            </div>                            
                         }
                     </ul>
                 </div>

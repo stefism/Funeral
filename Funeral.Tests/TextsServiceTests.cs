@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Funeral.Tests
 {
-    public class TextsServicesTests
+    public class TextsServiceTests
     {
         List<Obituary> ObituariesList = new List<Obituary>
         {
@@ -49,7 +49,6 @@ namespace Funeral.Tests
                 YearId = "YearId2",
             }
         };
-
         List<TextTemplate> TextTemplatesList = new List<TextTemplate>
         {
             new TextTemplate
@@ -67,7 +66,7 @@ namespace Funeral.Tests
         private Mock<IEFRepository<TextTemplate>> textTemplateRepo;
         private Mock<IEFRepository<Obituary>> obituaryRepo;
 
-        public TextsServicesTests()
+        public TextsServiceTests()
         {
             obituaryRepo = new Mock<IEFRepository<Obituary>>();
             textTemplateRepo = new Mock<IEFRepository<TextTemplate>>();
