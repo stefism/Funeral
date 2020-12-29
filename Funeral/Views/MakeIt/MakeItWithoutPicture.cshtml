@@ -5,18 +5,18 @@
 }
 <!DOCTYPE html>
 <html>
-<head>  
-    <link rel="stylesheet" href="~/css/Main.css">
+<head>
+    <link rel="stylesheet" href="~/css/MainWithout.css">
 </head>
 <body>
     <aside id="menu-items">
 
         <ul>
-            @*<li><a class="mr-5" asp-controller="MakeIt" asp-action="MakeItWithoutPicture" asp-route-type="no"><i class="fas fa-clipboard-list"></i> Шаблон без снимка</a></li>*@
+            <li><a class="mr-5" asp-controller="MakeIt" asp-action="MakeIt"><i class="far fa-address-card"></i> Шаблон със снимка</a></li>
 
-            <li><a asp-controller="MakeIt" asp-action="ChangeToFrames"><i class="fas fa-chalkboard-teacher"></i> Рамки</a></li>
-            <li><a asp-controller="MakeIt" asp-action="ChangeToTexts"><i class="fas fa-file-alt"></i> Текстове</a></li>
-            <li><a asp-controller="MakeIt" asp-action="ChangeToCrosses"><i class="fas fa-bible"></i> Кръстове</a></li>
+            <li><a asp-controller="MakeIt" asp-action="ChangeToFrames" asp-route-type="no"><i class="fas fa-chalkboard-teacher"></i> Рамки</a></li>
+            <li><a asp-controller="MakeIt" asp-action="ChangeToTexts" asp-route-type="no"><i class="fas fa-file-alt"></i> Текстове</a></li>
+            <li><a asp-controller="MakeIt" asp-action="ChangeToCrosses" asp-route-type="no"><i class="fas fa-bible"></i> Кръстове</a></li>
         </ul>
 
     </aside>
@@ -25,37 +25,25 @@
         <div id="main-window">
 
             <img id="background" name="background" src="@Model.CurrentFrame" alt="">
-            <img width="70px" id="cross" name="cross" src="@Model.CurrentCross" alt="">
-            <div id="pic-border">
-                <img id="face" name="picture" src="@Model.Picture" alt="">
-            </div>
+            <img width="70px" id="crossNo" name="cross" src="@Model.CurrentCross" alt="">
 
-            <div id="uploadImageForm">
-                <form method="post" enctype="multipart/form-data" asp-controller="MakeIt" asp-action="UploadImage">
-                    <input id="inputBtn" type="file" name="imgFile" />
-                    <button id="uploadBtn" type="submit"><i class="fontIcons fas fa-upload"></i></button>
-                </form>
-
-            </div>
-
-            <form method="post" asp-action="SaveCurrentWork">
+            <form method="post" asp-action="SaveCurrentWork" asp-route-type="no">
 
                 <div asp-validation-summary="All" class="text-danger"></div>
 
-                <textarea name="crossText" id="cross-text">@Model.CrossText</textarea>
-                <textarea name="afterCrossText" id="after-cross-text">@Model.AfterCrossText</textarea>
+                <textarea name="crossText" id="cross-textNo">@Model.CrossText</textarea>
+                <textarea name="afterCrossText" id="after-cross-textNo">@Model.AfterCrossText</textarea>
 
 
                 <div>
-                    <textarea asp-for="FullName" name="fullName" id="full-name"></textarea>
+                    <textarea asp-for="FullName" name="fullName" id="full-nameNo"></textarea>
                     <span asp-validation-for="FullName" class="text-danger"></span>
                 </div>
-                
 
-                <textarea name="year" id="year">@Model.Year</textarea>
-                <textarea name="mainText" id="main-text">@Model.CurrentText</textarea>
-                <textarea name="panahida" id="panahida">@Model.Panahida</textarea>
-                <textarea name="from" id="from">@Model.From</textarea>
+                <textarea name="year" id="yearNo">@Model.Year</textarea>
+                <textarea name="mainText" id="main-textNo">@Model.CurrentText</textarea>
+                <textarea name="panahida" id="panahidaNo">@Model.Panahida</textarea>
+                <textarea name="from" id="fromNo">@Model.From</textarea>
 
                 <button type="submit" id="save-work"><i class="fontIcons fas fa-save"></i></button>
             </form>
@@ -85,21 +73,21 @@
             {
                 foreach (var frame in Model.AllFrames)
                 {
-                    <a href="/MakeIt/ChangeFrame?frameId=@frame.FrameId"><img class="elements" src="@frame.FilePath" alt="image"></a>
+                    <a href="/MakeIt/ChangeFrame?frameId=@frame.FrameId&type=no"><img class="elements" src="@frame.FilePath" alt="image"></a>
                 }
             }
             else if (Model.Elements == Elements.Crosses)
             {
                 foreach (var cross in Model.AllCrosses)
                 {
-                    <a href="/MakeIt/ChangeCross?crossId=@cross.CrossId"><img class="elements" src="@cross.FilePath" alt="image"></a>
+                    <a href="/MakeIt/ChangeCross?crossId=@cross.CrossId&type=no"><img class="elements" src="@cross.FilePath" alt="image"></a>
                 }
             }
             else if (Model.Elements == Elements.Texts)
             {
                 foreach (var text in Model.AllTexts)
                 {
-                    <a href="/MakeIt/ChangeText?textId=@text.TextId"><p class="elements side-texts">@text.TextTemplate</p></a>
+                    <a href="/MakeIt/ChangeText?textId=@text.TextId&type=no"><p class="elements side-texts">@text.TextTemplate</p></a>
                 }
             }
 

@@ -28,14 +28,14 @@ namespace Funeral.Web.Controllers
         private readonly IUserPictureService userPictureService;
         private readonly IWebHostEnvironment environment;
 
-        private string UserId => 
+        private string UserId =>
             User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
         public MakeItController(
-            IFramesService framesService, 
-            ICrossesService crossesService, 
-            ITextsService textsService, 
-            IObituaryService obituaryService, 
+            IFramesService framesService,
+            ICrossesService crossesService,
+            ITextsService textsService,
+            IObituaryService obituaryService,
             IFileService fileService,
             IUserPictureService userPictureService,
             IWebHostEnvironment environment)
@@ -58,6 +58,15 @@ namespace Funeral.Web.Controllers
             return View(viewModel);
         }
 
+        public IActionResult MakeItWithoutPicture()
+        {
+            var userName = User.Identity.Name;
+
+            SetInitialValuesToTempData(userName);
+            var viewModel = AddValuesToModel(userName);
+            return View(viewModel);
+        }
+
         public IActionResult ClearUserTempData()
         {
             tempData.Remove(User.Identity.Name);
@@ -65,51 +74,81 @@ namespace Funeral.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ChangeToCrosses()
+        public IActionResult ChangeToCrosses(string type)
         {
             tempData[User.Identity.Name].Elements = Elements.Crosses;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
-        public IActionResult ChangeToFrames()
+        public IActionResult ChangeToFrames(string type)
         {
             tempData[User.Identity.Name].Elements = Elements.Frames;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
-        public IActionResult ChangeToTexts()
+        public IActionResult ChangeToTexts(string type)
         {
             tempData[User.Identity.Name].Elements = Elements.Texts;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
-        public IActionResult ChangeFrame(string frameId)
+        public IActionResult ChangeFrame(string frameId, string type)
         {
             var framePath = framesService.GetFramePathById(frameId);
 
             tempData[User.Identity.Name].CurrentFrame = framePath;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
-        public async Task<IActionResult> ChangeCross(string crossId)
+        public async Task<IActionResult> ChangeCross(string crossId, string type)
         {
             var crossPath = crossesService.GetCrossPathByIdAsync(crossId);
 
             tempData[User.Identity.Name].CurrentCross = await crossPath;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
-        public IActionResult ChangeText(string textId)
+        public IActionResult ChangeText(string textId, string type)
         {
             var text = textsService.GetTextById(textId);
             tempData[User.Identity.Name].CurrentText = text;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
         [HttpPost]
@@ -187,7 +226,7 @@ namespace Funeral.Web.Controllers
             return Redirect($"/Obituary/Current?id={obituaryId}");
         }
 
-        public IActionResult SaveCurrentWork(CurrentWorkInputModel input)
+        public IActionResult SaveCurrentWork(CurrentWorkInputModel input, string type)
         {
             tempData[User.Identity.Name].CrossText = input.CrossText;
             tempData[User.Identity.Name].AfterCrossText = input.AfterCrossText;
@@ -197,7 +236,12 @@ namespace Funeral.Web.Controllers
             tempData[User.Identity.Name].Panahida = input.Panahida;
             tempData[User.Identity.Name].From = input.From;
 
-            return RedirectToAction("MakeIt");
+            if (type == "no")
+            {
+                return RedirectToAction(nameof(MakeItWithoutPicture));
+            }
+
+            return RedirectToAction(nameof(MakeIt));
         }
 
         private bool IsImage(Stream stream)

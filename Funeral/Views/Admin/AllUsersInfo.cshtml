@@ -7,14 +7,15 @@
 <hr />
 
 <table class="table table-striped table-hover">
-    <thead class="thead-dark">
+    <thead class="thead-dark text-center align-content-center">
         <tr>
             <th>Потребителско име</th>
             <th>И-мейл</th>
             <th>Направени некролози</th>
             <th>Качени снимки</th>
-            <th>Покажи некролозите</th>
-            <th>Покажи снимките</th>
+            <th>Некролози на потребителя</th>
+            <th>Снимки на потребителя</th>
+            <th>Изпрати му поща</th>
         </tr>
     </thead>
     @foreach (var user in Model)
@@ -22,26 +23,27 @@
         <tr>
             <td>@user.Username</td>
             <td>@user.Email</td>
-            <td>@user.ObituaryCount</td>
-            <td>@user.PicturesCount</td>
+            <td class="text-center">@user.ObituaryCount</td>
+            <td class="text-center">@user.PicturesCount</td>
 
             @if (@user.ObituaryCount > 0)
             {
-                <td><a asp-controller="Obituary" asp-action="AllUserObituaryAdmin" asp-route-id="@user.Id" class="btn btn-sm btn-outline-info">Некролози на потребителя</a></td>
+                <td><a asp-controller="Obituary" asp-action="AllUserObituaryAdmin" asp-route-id="@user.Id" class="btn btn-sm btn-outline-info text-center"><i class="far fa-address-book"></i> Покажи</a></td>
             }
             else
             {
-                <td>Няма некролози за показване</td>
+                <td>Няма</td>
             }
 
             @if (@user.PicturesCount > 0)
             {
-                <td><a asp-controller="UserPictures" asp-action="AllUserPicturesAdmin" asp-route-id="@user.Id" class="btn btn-sm btn-outline-success">Снимки на потребителя</a></td>
+                <td><a asp-controller="UserPictures" asp-action="AllUserPicturesAdmin" asp-route-id="@user.Id" class="btn btn-sm btn-outline-success"><i class="fas fa-grip-horizontal"></i> Покажи</a></td>
             }
             else
             {
-                <td>Няма снимки за показване</td>
+                <td>Няма</td>
             }
+            <td><a class="btn btn-sm btn-outline-success"><i class="fas fa-envelope-open-text"></i> Напиши</a></td>
         </tr>
     }
 </table>
