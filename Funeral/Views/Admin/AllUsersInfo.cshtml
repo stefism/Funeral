@@ -4,6 +4,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
+
 <hr />
 
 <table class="table table-striped table-hover">
@@ -11,6 +12,7 @@
         <tr>
             <th>Потребителско име</th>
             <th>И-мейл</th>
+            <th>Потвърден профил?</th>
             <th>Направени некролози</th>
             <th>Качени снимки</th>
             <th>Некролози на потребителя</th>
@@ -23,6 +25,14 @@
         <tr>
             <td>@user.Username</td>
             <td>@user.Email</td>
+            @if (user.IsEmailConfirmed)
+            {
+                <td class="text-center text-success"><b>Да</b></td>
+            }
+            else
+            {
+                <td class="text-center text-danger"><b>Не</b></td>
+            }
             <td class="text-center">@user.ObituaryCount</td>
             <td class="text-center">@user.PicturesCount</td>
 

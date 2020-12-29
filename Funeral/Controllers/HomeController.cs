@@ -18,6 +18,7 @@ namespace Funeral.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly ISendGridEmailSender emailSender;
         private readonly IGmailService gmailService;
+        private readonly IUserService userService;
         private readonly UserManager<IdentityUser> userManager;
 
         public HomeController(
@@ -25,19 +26,29 @@ namespace Funeral.Controllers
             RoleManager<IdentityRole> roleManager, 
             ISendGridEmailSender emailSender,
             IGmailService gmailService,
+            IUserService userService,
             UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
             this.gmailService = gmailService;
+            this.userService = userService;
             this.userManager = userManager;
             ;
         }
 
         public IActionResult Index()
-        {       
+        {
+            Partial();
             return View();
+        }
+
+        public IActionResult Partial()
+        {
+            var model = userService.ShowUsersAndPicturesCount();
+
+            return PartialView("_CountsPartial", model);
         }
 
         [Authorize(Roles = "Admin")]

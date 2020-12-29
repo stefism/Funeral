@@ -7,6 +7,8 @@ namespace Funeral.App.Services
     {
         ICollection<UserInfoViewModel> ShowUsersInfo();
 
+        CountsViewModel ShowUsersAndPicturesCount();
+
         string GetUserNameById(string id);
     }
 }

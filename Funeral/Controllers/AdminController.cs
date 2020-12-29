@@ -32,7 +32,7 @@ namespace Funeral.Web.Controllers
         }
 
         public IActionResult AllUsersInfo()
-        {
+        {            
             var viewModel = userService.ShowUsersInfo();
             
             return View(viewModel);

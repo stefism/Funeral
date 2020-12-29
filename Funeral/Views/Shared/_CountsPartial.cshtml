@@ -1,0 +1,8 @@
+﻿@using Funeral.App.ViewModels
+@model CountsViewModel
+
+<div class="row justify-content-center">
+    <label class="btn btn-primary btn-sm mr-3">Регистрирани потребители   <span class="badge btn btn-warning">@Model.TotalUsersCount</span></label>
+    <label class="btn btn-primary btn-sm mr-3">Изработени некролози   <span class="badge btn btn-warning">@Model.TotalObituaryCount</span></label>
+    <label class="btn btn-primary btn-sm mr-3">Качени снимки   <span class="badge btn btn-warning">@Model.TotalUserPicturesCount</span></label>
+</div>
