@@ -10,11 +10,16 @@ namespace Funeral.Web.Controllers
     {
         private readonly IObituaryService obituaryService;
         private readonly IUserPictureService userPictureService;
+        private readonly IUserService userService;
 
-        public ObituaryController(IObituaryService obituaryService, IUserPictureService pictureService)
+        public ObituaryController(
+            IObituaryService obituaryService, 
+            IUserPictureService pictureService,
+            IUserService userService)
         {
             this.obituaryService = obituaryService;
             this.userPictureService = pictureService;
+            this.userService = userService;
         }
 
         [Authorize]
@@ -42,7 +47,7 @@ namespace Funeral.Web.Controllers
         public async Task<IActionResult> AllUserObituaryAdmin(string id)
         {            
             var model = await obituaryService.AllUserObituarysAsync(id);
-            TempData["UserName"] = User.Identity.Name;
+            TempData["UserName"] = userService.GetUserNameById(id);
 
             return View(model);
         }

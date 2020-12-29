@@ -14,14 +14,19 @@ namespace Funeral.Web.Controllers
     {
         private readonly IUserPictureService userPictureService;
         private readonly IFileService fileService;
+        private readonly IUserService userService;
 
         private string UserId =>
             User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-        public UserPicturesController(IUserPictureService userPictureService, IFileService fileService)
+        public UserPicturesController(
+            IUserPictureService userPictureService, 
+            IFileService fileService,
+            IUserService userService)
         {
             this.userPictureService = userPictureService;
             this.fileService = fileService;
+            this.userService = userService;
         }
 
         public IActionResult AllUserPictures()
@@ -35,7 +40,7 @@ namespace Funeral.Web.Controllers
         public IActionResult AllUserPicturesAdmin(string id)
         {
             var viewModel = userPictureService.AllUserPictures(id);
-            TempData["UserName"] = User.Identity.Name;
+            TempData["UserName"] = userService.GetUserNameById(id);
             
             return View(viewModel);
         }
