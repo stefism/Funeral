@@ -1,7 +1,8 @@
 ## :eyeglasses: Project Introduction
 
 **Funeral Website** is my defense project for **ASP.NET Core** course at [SoftUni](https://softuni.bg/ "SoftUni") (October-December 2020). The site allows the users to create and print an obituary on a pre-generated template, which can then be modified.
-The project has been deployed in Azure and you may seen how it work in [This Link](https://funeralbg.azurewebsites.net "This Link").
+
+The project has been deployed in **Azure** and you may seen how it work in [This Link](https://funeralbg.azurewebsites.net "This Link").
 
 ## :pencil2: Overview
 
