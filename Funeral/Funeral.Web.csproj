@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>-</UserSecretsId>
+    <UserSecretsId>aspnet-Funeral-0E29E3CB-04D9-4DA4-BCB6-56D245359282</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-    <ApplicationInsightsResourceId>-</ApplicationInsightsResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/4c378afe-950a-4fea-8210-a52a2b3035e6/resourceGroups/funeralbg/providers/microsoft.insights/components/funeralbg</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>

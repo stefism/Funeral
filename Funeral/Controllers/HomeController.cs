@@ -51,7 +51,7 @@ namespace Funeral.Controllers
             return PartialView("_CountsPartial", model);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAdminRole()
         {
             await roleManager.CreateAsync(new IdentityRole("Admin"));
